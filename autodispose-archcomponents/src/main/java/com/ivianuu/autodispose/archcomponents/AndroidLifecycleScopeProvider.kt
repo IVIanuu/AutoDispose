@@ -18,6 +18,8 @@ package com.ivianuu.autodispose.archcomponents
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.Lifecycle.Event
+import android.arch.lifecycle.Lifecycle.Event.*
+import android.arch.lifecycle.Lifecycle.State.*
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.OnLifecycleEvent
@@ -33,7 +35,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  * A [LifecycleScopeProvider] for [LifecycleOwner]'s
  */
 class AndroidLifecycleScopeProvider private constructor(
-    private val owner: LifecycleOwner
+    owner: LifecycleOwner
 ) : LifecycleScopeProvider<Event> {
 
     private val lifecycleObservable = LifecycleObservable(owner.lifecycle)
@@ -47,65 +49,15 @@ class AndroidLifecycleScopeProvider private constructor(
         return lifecycleObservable.value
     }
 
-    internal class LifecycleObservable(private val lifecycle: Lifecycle) : Observable<Event>() {
-        private val subject = BehaviorSubject.create<Event>()
-
-        val value: Event?
-            get() = subject.value
-
-        fun backfillEvents() {
-            val correspondingEvent = when (lifecycle.currentState) {
-                Lifecycle.State.INITIALIZED -> Event.ON_CREATE
-                Lifecycle.State.CREATED -> Event.ON_START
-                Lifecycle.State.STARTED, Lifecycle.State.RESUMED -> Event.ON_RESUME
-                Lifecycle.State.DESTROYED -> Event.ON_DESTROY
-                else -> Event.ON_DESTROY
-            }
-
-            subject.onNext(correspondingEvent)
-        }
-
-        override fun subscribeActual(observer: Observer<in Event>) {
-            val archObserver = ArchLifecycleObserver(lifecycle, observer, subject)
-            observer.onSubscribe(archObserver)
-            lifecycle.addObserver(archObserver)
-        }
-
-        open class ArchLifecycleObserver(
-            private val lifecycle: Lifecycle, private val observer: Observer<in Event>,
-            private val subject: BehaviorSubject<Event>
-        ) : Disposable, LifecycleObserver {
-
-            private val disposed = AtomicBoolean(false)
-
-            override fun isDisposed(): Boolean = disposed.get()
-
-            override fun dispose() {
-                if (!disposed.getAndSet(true)) {
-                    lifecycle.removeObserver(this)
-                }
-            }
-
-            @OnLifecycleEvent(Event.ON_ANY)
-            fun onStateChange(owner: LifecycleOwner, event: Event) {
-                if (!isDisposed) {
-                    if (!(event == Event.ON_CREATE && subject.value == event)) {
-                        subject.onNext(event)
-                    }
-                    observer.onNext(event)
-                }
-            }
-        }
-    }
-
     companion object {
-
         private val CORRESPONDING_EVENTS =
             Function<Event, Event> { lastEvent ->
                 when (lastEvent) {
-                    Event.ON_CREATE -> Event.ON_DESTROY
-                    Event.ON_START -> Event.ON_STOP
-                    Event.ON_RESUME -> Event.ON_PAUSE
+                    ON_CREATE -> Event.ON_DESTROY
+                    ON_START -> Event.ON_STOP
+                    ON_RESUME -> Event.ON_PAUSE
+                    ON_PAUSE -> ON_STOP
+                    ON_STOP -> ON_DESTROY
                     else -> throw IllegalStateException(
                         "Lifecycle has ended! Last event was $lastEvent"
                     )
@@ -117,5 +69,56 @@ class AndroidLifecycleScopeProvider private constructor(
             return AndroidLifecycleScopeProvider(owner)
         }
 
+    }
+}
+
+internal class LifecycleObservable(private val lifecycle: Lifecycle) : Observable<Event>() {
+    private val subject = BehaviorSubject.create<Event>()
+
+    val value: Event?
+        get() = subject.value
+
+    fun backfillEvents() {
+        val correspondingEvent = when (lifecycle.currentState) {
+            INITIALIZED -> ON_CREATE
+            CREATED ->  ON_START
+            STARTED, RESUMED -> ON_RESUME
+            DESTROYED -> ON_DESTROY
+            else ->  ON_DESTROY
+        }
+
+        subject.onNext(correspondingEvent)
+    }
+
+    override fun subscribeActual(observer: Observer<in Event>) {
+        val archObserver = ArchLifecycleObserver(lifecycle, observer, subject)
+        observer.onSubscribe(archObserver)
+        lifecycle.addObserver(archObserver)
+    }
+
+    class ArchLifecycleObserver(
+        private val lifecycle: Lifecycle, private val observer: Observer<in Event>,
+        private val subject: BehaviorSubject<Event>
+    ) : Disposable, LifecycleObserver {
+
+        private val disposed = AtomicBoolean(false)
+
+        override fun isDisposed(): Boolean = disposed.get()
+
+        override fun dispose() {
+            if (!disposed.getAndSet(true)) {
+                lifecycle.removeObserver(this)
+            }
+        }
+
+        @OnLifecycleEvent(Event.ON_ANY)
+        fun onStateChange(owner: LifecycleOwner, event: Event) {
+            if (!isDisposed) {
+                if (!(event == ON_CREATE && subject.value == event)) {
+                    subject.onNext(event)
+                }
+                observer.onNext(event)
+            }
+        }
     }
 }
