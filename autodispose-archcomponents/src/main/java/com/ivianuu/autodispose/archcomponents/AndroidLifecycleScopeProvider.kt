@@ -64,7 +64,6 @@ class AndroidLifecycleScopeProvider private constructor(
                 }
             }
 
-        @JvmStatic
         fun from(owner: LifecycleOwner): AndroidLifecycleScopeProvider {
             return AndroidLifecycleScopeProvider(owner)
         }

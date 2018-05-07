@@ -24,17 +24,14 @@ import io.reactivex.disposables.Disposable
  */
 object AutoDispose {
 
-    @JvmStatic
     fun autoDispose(disposable: Disposable, scopeProvider: ScopeProvider) {
         autoDispose(disposable, scopeProvider.requestScope())
     }
 
-    @JvmStatic
     fun autoDispose(disposable: Disposable, scope: Maybe<*>) {
         AutoDisposer(disposable, scope)
     }
 
-    @JvmStatic
     fun <T> autoDispose(
         disposable: Disposable,
         lifecycleScopeProvider: LifecycleScopeProvider<T>
@@ -44,7 +41,6 @@ object AutoDispose {
         autoDispose(disposable, lifecycleScopeProvider, untilEvent)
     }
 
-    @JvmStatic
     fun <T> autoDispose(
         disposable: Disposable,
         lifecycleScopeProvider: LifecycleScopeProvider<T>,

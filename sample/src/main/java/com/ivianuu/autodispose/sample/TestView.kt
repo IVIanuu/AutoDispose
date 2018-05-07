@@ -19,11 +19,7 @@ package com.ivianuu.autodispose.sample
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import android.widget.TextView
-import com.ivianuu.autodispose.autoDispose
-import com.ivianuu.autodispose.view.ViewScopeProvider
 import com.ivianuu.autodispose.view.autoDispose
-import io.reactivex.Observable
 
 /**
  * @author Manuel Wrage (IVIanuu)
@@ -35,7 +31,9 @@ class TestView @JvmOverloads constructor(
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        testObservable().subscribe()
+
+        testObservable()
+            .subscribe()
             .autoDispose(this)
     }
 

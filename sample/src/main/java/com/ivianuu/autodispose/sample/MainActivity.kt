@@ -16,21 +16,9 @@
 
 package com.ivianuu.autodispose.sample
 
-import android.arch.lifecycle.Lifecycle
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.ivianuu.autodispose.LifecycleScopeProvider
-import com.ivianuu.autodispose.ScopeProvider
+import android.support.v7.app.AppCompatActivity
 import com.ivianuu.autodispose.archcomponents.autoDispose
-import com.ivianuu.autodispose.autoDispose
-import com.ivianuu.autodispose.view.autoDispose
-import io.reactivex.Maybe
-import io.reactivex.Observable
-import io.reactivex.functions.Function
-import io.reactivex.subjects.BehaviorSubject
-import io.reactivex.subjects.PublishSubject
-import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,7 +30,8 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        testObservable().subscribe()
+        testObservable()
+            .subscribe()
             .autoDispose(this)
     }
 

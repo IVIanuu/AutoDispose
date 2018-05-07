@@ -55,7 +55,6 @@ class ViewScopeProvider private constructor(private val view: View) : ScopeProvi
 
     companion object {
 
-        @JvmStatic
         fun from(view: View): ViewScopeProvider {
             return ViewScopeProvider(view)
         }

@@ -29,15 +29,15 @@ internal class AutoDisposer(
 ) {
 
     private val mainDisposable = AtomicReference<Disposable?>(mainDisposable)
-    private val autoDisposable = AtomicReference<Disposable?>()
+    private val scopeDisposable = AtomicReference<Disposable?>()
 
     init {
-        autoDisposable.set(scope.subscribe { dispose() })
+        scopeDisposable.set(scope.subscribe { dispose() })
     }
 
     private fun dispose() {
         mainDisposable.getAndSet(null)?.dispose()
-        autoDisposable.getAndSet(null)?.dispose()
+        scopeDisposable.getAndSet(null)?.dispose()
     }
 
 }
