@@ -18,6 +18,7 @@ package com.ivianuu.autodispose.view
 
 import android.os.Build
 import android.view.View
+import com.ivianuu.autodispose.OutsideLifecycleException
 import com.ivianuu.autodispose.ScopeProvider
 import io.reactivex.Maybe
 
@@ -32,7 +33,7 @@ class ViewScopeProvider private constructor(private val view: View) : ScopeProvi
                 || view.windowToken != null
 
         if (!isAttached) {
-            throw IllegalStateException("view not attached")
+            throw OutsideLifecycleException("view not attached")
         }
 
         return Maybe.create<Unit> { e ->

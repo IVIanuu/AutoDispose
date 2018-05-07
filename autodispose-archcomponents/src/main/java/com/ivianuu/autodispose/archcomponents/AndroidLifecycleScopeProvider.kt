@@ -24,6 +24,7 @@ import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.OnLifecycleEvent
 import com.ivianuu.autodispose.LifecycleScopeProvider
+import com.ivianuu.autodispose.OutsideLifecycleException
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -58,8 +59,8 @@ class AndroidLifecycleScopeProvider private constructor(
                     ON_RESUME -> Event.ON_PAUSE
                     ON_PAUSE -> ON_STOP
                     ON_STOP -> ON_DESTROY
-                    else -> throw IllegalStateException(
-                        "Lifecycle has ended! Last event was $lastEvent"
+                    else -> throw OutsideLifecycleException(
+                        "Lifecycle has ended! last event was $lastEvent"
                     )
                 }
             }

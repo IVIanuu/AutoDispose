@@ -17,6 +17,7 @@
 package com.ivianuu.autodispose
 
 import io.reactivex.Maybe
+import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 
 /**
@@ -36,7 +37,9 @@ object AutoDispose {
         disposable: Disposable,
         lifecycleScopeProvider: LifecycleScopeProvider<T>
     ) {
-        val currentEvent = lifecycleScopeProvider.peekLifecycle() ?: throw IllegalArgumentException("out of lifecycle")
+        val currentEvent = lifecycleScopeProvider.peekLifecycle() ?:
+        throw OutsideLifecycleException("lifecycle has not started yet")
+
         val untilEvent = lifecycleScopeProvider.correspondingEvents().apply(currentEvent)
         autoDispose(disposable, lifecycleScopeProvider, untilEvent)
     }
@@ -46,7 +49,15 @@ object AutoDispose {
         lifecycleScopeProvider: LifecycleScopeProvider<T>,
         untilEvent: T
     ) {
-        val scope = lifecycleScopeProvider.lifecycle()
+        autoDispose(disposable, lifecycleScopeProvider.lifecycle(), untilEvent)
+    }
+
+    fun <T> autoDispose(
+        disposable: Disposable,
+        lifecycle: Observable<T>,
+        untilEvent: T
+    ) {
+        val scope = lifecycle
             .filter { it == untilEvent }
             .take(1)
             .singleElement()

@@ -14,24 +14,10 @@
  * limitations under the License.
  */
 
-package com.ivianuu.autodispose.sample
+package com.ivianuu.autodispose
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import com.ivianuu.autodispose.archcomponents.autoDispose
-
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        testObservable()
-            .subscribe()
-            .autoDispose(this)
-    }
-}
+/**
+ * This is an exception that can be thrown to indicate that the caller has attempted to bind to a lifecycle outside
+ * of its allowable window.
+ */
+open class OutsideLifecycleException(detailMessage: String? = null) : IllegalStateException(detailMessage)

@@ -17,6 +17,7 @@
 package com.ivianuu.autodispose
 
 import io.reactivex.Maybe
+import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 
 fun Disposable.autoDispose(scopeProvider: ScopeProvider) {
@@ -33,6 +34,11 @@ fun <T> Disposable.autoDispose(lifecycleScopeProvider: LifecycleScopeProvider<T>
 
 fun <T> Disposable.autoDispose(
     lifecycleScopeProvider: LifecycleScopeProvider<T>,
-    untilEvent: T) {
+    untilEvent: T
+) {
     AutoDispose.autoDispose(this, lifecycleScopeProvider, untilEvent)
+}
+
+fun <T> Disposable.autoDispose(lifecycle: Observable<T>, untilEvent: T) {
+    AutoDispose.autoDispose(this, lifecycle, untilEvent)
 }
