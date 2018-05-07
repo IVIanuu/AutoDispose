@@ -44,7 +44,8 @@ object AutoDispose {
     fun <T> autoDispose(
         disposable: Disposable,
         lifecycleScopeProvider: LifecycleScopeProvider<T>,
-        untilEvent: T) {
+        untilEvent: T
+    ) {
         val scope = lifecycleScopeProvider.lifecycle()
             .filter { it == untilEvent }
             .take(1)
