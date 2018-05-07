@@ -32,7 +32,7 @@ buildscript {
         archComponentsCompiler = "android.arch.lifecycle:compiler:$archComponentsVersion"
         archComponentsRuntime = "android.arch.lifecycle:runtime:$archComponentsVersion"
 
-        rxJava = 'io.reactivex.rxjava2:rxjava:2.1.12'
+        rxJava = 'io.reactivex.rxjava2:rxjava:2.1.13'
 
         supportVersion = '27.1.1'
         supportAppCompat = "com.android.support:appcompat-v7:$supportVersion"
