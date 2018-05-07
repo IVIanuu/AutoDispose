@@ -34,7 +34,7 @@ buildscript {
 
         rxJava = 'io.reactivex.rxjava2:rxjava:2.1.12'
 
-        supportVersion = '27.0.2'
+        supportVersion = '27.1.1'
         supportAppCompat = "com.android.support:appcompat-v7:$supportVersion"
     }
 
