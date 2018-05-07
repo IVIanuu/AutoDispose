@@ -34,6 +34,8 @@ dependencies {
     api rootProject.ext.archComponentsRuntime
     annotationProcessor rootProject.ext.archComponentsCompiler
 
+    api rootProject.ext.supportAnnotations
+
     // AutoDispose
     api project(':autodispose')
 }
