@@ -14,4 +14,27 @@
  * limitations under the License.
  */
 
-include ':sample', ':autodispose', ':autodispose', ':autodispose-view', ':autodispose-archcomponents', ':autodispose-conductor'
+package com.ivianuu.autodispose.sample
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.bluelinelabs.conductor.Controller
+import com.ivianuu.autodispose.conductor.autoDispose
+
+/**
+ * @author Manuel Wrage (IVIanuu)
+ */
+class TestController : Controller() {
+
+    init {
+        testObservable()
+            .subscribe()
+            .autoDispose(this)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View {
+        return inflater.inflate(R.layout.controller_test, container, false)
+    }
+
+}

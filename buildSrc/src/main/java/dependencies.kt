@@ -4,16 +4,18 @@ object Versions {
     // android
     const val compileSdk = 27
     const val minSdk = 14
+    const val minSdkConductor = 16
     const val targetSdk = 27
     const val versionCode = 1
     const val versionName = "1.0"
 
     const val androidGradlePlugin = "3.1.2"
     const val archComponents = "1.1.1"
+    const val conductor = "2.1.4"
     const val kotlin = "1.2.41"
     const val mavenGradle = "2.1"
     const val rxJava = "2.1.13"
-    const val support = "27.1.1"
+    const val support = "27.0.2"
 }
 //
 object Deps {
@@ -21,6 +23,8 @@ object Deps {
 
     const val archComponentsCompiler = "android.arch.lifecycle:compiler:${Versions.archComponents}"
     const val archComponentsRuntime = "android.arch.lifecycle:runtime:${Versions.archComponents}"
+
+    const val conductor = "com.bluelinelabs:conductor:${Versions.conductor}"
 
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:${Versions.kotlin}"

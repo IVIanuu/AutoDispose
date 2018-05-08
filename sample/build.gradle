@@ -21,7 +21,7 @@ android {
     compileSdkVersion Versions.compileSdk
     defaultConfig {
         applicationId "com.ivianuu.autodispose.sample"
-        minSdkVersion Versions.minSdk
+        minSdkVersion Versions.minSdkConductor
         targetSdkVersion Versions.targetSdk
         versionCode Versions.versionCode
         versionName Versions.versionName
@@ -29,14 +29,12 @@ android {
 }
 
 dependencies {
-    // Android Support
     implementation Deps.supportAppCompat
 
-    // AutoDispose
     implementation project(':autodispose')
     implementation project(':autodispose-archcomponents')
+    implementation project(':autodispose-conductor')
     implementation project(':autodispose-view')
 
-    // Kotlin
     implementation Deps.kotlinStdLib
 }

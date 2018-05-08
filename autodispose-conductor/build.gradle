@@ -16,6 +16,7 @@
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'com.github.dcendents.android-maven'
 
 group='com.github.ivianuu'
@@ -24,12 +25,14 @@ android {
     compileSdkVersion Versions.compileSdk
 
     defaultConfig {
-        minSdkVersion Versions.minSdk
+        minSdkVersion Versions.minSdkConductor
         targetSdkVersion Versions.targetSdk
     }
 }
 
 dependencies {
+    api Deps.conductor
+
     api project(':autodispose')
 }
 

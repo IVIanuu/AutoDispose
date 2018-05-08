@@ -31,13 +31,11 @@ android {
 }
 
 dependencies {
-    // Arch Components
     api Deps.archComponentsRuntime
     kapt Deps.archComponentsCompiler
 
     api Deps.supportAnnotations
 
-    // AutoDispose
     api project(':autodispose')
 }
 
