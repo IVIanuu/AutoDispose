@@ -21,20 +21,20 @@ apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.ivianuu'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion Versions.compileSdk
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion Versions.minSdk
+        targetSdkVersion Versions.targetSdk
     }
 }
 
 dependencies {
     // Arch Components
-    api rootProject.ext.archComponentsRuntime
-    annotationProcessor rootProject.ext.archComponentsCompiler
+    api Deps.archComponentsRuntime
+    kapt Deps.archComponentsCompiler
 
-    api rootProject.ext.supportAnnotations
+    api Deps.supportAnnotations
 
     // AutoDispose
     api project(':autodispose')
