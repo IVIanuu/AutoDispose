@@ -8,6 +8,7 @@ object Versions {
     const val versionCode = 1
     const val versionName = "1.0"
 
+    const val androidGradlePlugin = "3.1.2"
     const val archComponents = "1.1.1"
     const val kotlin = "1.2.41"
     const val mavenGradle = "2.1"
@@ -16,7 +17,7 @@ object Versions {
 }
 //
 object Deps {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:3.1.2"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
 
     const val archComponentsCompiler = "android.arch.lifecycle:compiler:${Versions.archComponents}"
     const val archComponentsRuntime = "android.arch.lifecycle:runtime:${Versions.archComponents}"
