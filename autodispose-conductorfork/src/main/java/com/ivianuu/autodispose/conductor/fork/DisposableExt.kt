@@ -14,4 +14,16 @@
  * limitations under the License.
  */
 
-include ':sample', ':autodispose', ':autodispose', ':autodispose-view', ':autodispose-archcomponents', ':autodispose-conductorfork', ':autodispose-conductor'
+package com.ivianuu.autodispose.conductor.fork
+
+import com.ivianuu.autodispose.autoDispose
+import com.ivianuu.conductor.Controller
+import io.reactivex.disposables.Disposable
+
+fun Disposable.autoDispose(controller: Controller) {
+    autoDispose(ControllerScopeProvider.from(controller))
+}
+
+fun Disposable.autoDispose(controller: Controller, event: ControllerEvent) {
+    autoDispose(ControllerScopeProvider.from(controller), event)
+}

@@ -20,7 +20,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ivianuu.autodispose.conductor.autoDispose
+import com.ivianuu.autodispose.conductor.fork.autoDispose
 import com.ivianuu.conductor.Controller
 
 /**
