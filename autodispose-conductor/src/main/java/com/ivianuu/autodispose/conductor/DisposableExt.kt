@@ -14,26 +14,16 @@
  * limitations under the License.
  */
 
-package com.ivianuu.autodispose
+package com.ivianuu.autodispose.conductor
 
-import io.reactivex.Maybe
+import com.bluelinelabs.conductor.Controller
+import com.ivianuu.autodispose.autoDispose
 import io.reactivex.disposables.Disposable
-import java.util.concurrent.atomic.AtomicReference
 
-/**
- * Auto disposes the main disposable on emission of the scope
- */
-internal class AutoDisposer(
-    mainDisposable: Disposable,
-    scope: Maybe<*>
-) {
+fun Disposable.autoDispose(controller: Controller) {
+    autoDispose(ControllerScopeProvider.from(controller))
+}
 
-    private val mainDisposable = AtomicReference<Disposable?>(mainDisposable)
-    private val scopeDisposable = AtomicReference<Disposable?>(scope.subscribe { dispose() })
-
-    private fun dispose() {
-        mainDisposable.getAndSet(null)?.dispose()
-        scopeDisposable.getAndSet(null)?.dispose()
-    }
-
+fun Disposable.autoDispose(controller: Controller, event: ControllerEvent) {
+    autoDispose(ControllerScopeProvider.from(controller), event)
 }
