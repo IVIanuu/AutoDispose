@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ivianuu.autodispose.conductor
+package com.ivianuu.autodispose.conductorfork
 
 import com.bluelinelabs.conductor.Controller
 import com.ivianuu.autodispose.autoDispose

@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.ivianuu.autodispose.conductor.fork
+package com.ivianuu.autodispose.conductorfork
 
 import android.content.Context
 import android.view.View
 import com.ivianuu.autodispose.LifecycleScopeProvider
 import com.ivianuu.autodispose.OutsideLifecycleException
-import com.ivianuu.autodispose.conductor.fork.ControllerEvent.*
+import com.ivianuu.autodispose.conductorfork.ControllerEvent.*
 import com.ivianuu.conductor.Controller
 import io.reactivex.functions.Function
 import io.reactivex.subjects.BehaviorSubject

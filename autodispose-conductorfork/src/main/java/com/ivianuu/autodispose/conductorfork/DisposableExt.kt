@@ -14,31 +14,23 @@
  * limitations under the License.
  */
 
-package com.ivianuu.autodispose.sample
+package com.ivianuu.autodispose.conductorfork
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.ivianuu.autodispose.conductorfork.autoDispose
+import com.ivianuu.autodispose.autoDispose
 import com.ivianuu.conductor.Controller
+import io.reactivex.disposables.Disposable
 
-/**
- * @author Manuel Wrage (IVIanuu)
- */
-class TestController : Controller() {
+fun Disposable.autoDispose(controller: Controller) {
+    autoDispose(
+        ControllerScopeProvider.from(
+            controller
+        )
+    )
+}
 
-    init {
-        testObservable()
-            .subscribe()
-            .autoDispose(this)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup,
-        savedViewState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.controller_test, container, false)
-    }
+fun Disposable.autoDispose(controller: Controller, event: ControllerEvent) {
+    autoDispose(
+        ControllerScopeProvider.from(
+            controller
+        ), event)
 }
