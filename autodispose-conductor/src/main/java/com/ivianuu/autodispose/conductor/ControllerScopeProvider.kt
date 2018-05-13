@@ -18,7 +18,7 @@ package com.ivianuu.autodispose.conductor
 
 import android.content.Context
 import android.view.View
-import com.bluelinelabs.conductor.Controller
+import com.ivianuu.conductor.Controller
 import com.ivianuu.autodispose.LifecycleScopeProvider
 import com.ivianuu.autodispose.OutsideLifecycleException
 import com.ivianuu.autodispose.conductor.ControllerEvent.*

@@ -16,7 +16,7 @@
 
 package com.ivianuu.autodispose.conductor
 
-import com.bluelinelabs.conductor.Controller
+import com.ivianuu.conductor.Controller
 import com.ivianuu.autodispose.autoDispose
 import io.reactivex.disposables.Disposable
 
