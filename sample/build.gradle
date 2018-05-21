@@ -33,7 +33,7 @@ dependencies {
 
     implementation project(':autodispose')
     implementation project(':autodispose-archcomponents')
-    implementation project(':autodispose-conductorfork')
+    implementation project(':autodispose-conductor')
     implementation project(':autodispose-view')
 
     implementation Deps.kotlinStdLib

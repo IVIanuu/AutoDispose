@@ -16,12 +16,11 @@
 
 package com.ivianuu.autodispose.sample
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ivianuu.autodispose.conductorfork.autoDispose
-import com.ivianuu.conductor.Controller
+import com.bluelinelabs.conductor.Controller
+import com.ivianuu.autodispose.conductor.autoDispose
 
 /**
  * @author Manuel Wrage (IVIanuu)
@@ -36,8 +35,7 @@ class TestController : Controller() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
-        container: ViewGroup,
-        savedViewState: Bundle?
+        container: ViewGroup
     ): View {
         return inflater.inflate(R.layout.controller_test, container, false)
     }
