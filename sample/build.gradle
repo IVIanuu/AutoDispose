@@ -32,7 +32,7 @@ dependencies {
     implementation Deps.supportAppCompat
 
     implementation project(':autodispose')
-    implementation project(':autodispose-archcomponents')
+    implementation project(':autodispose-arch')
     implementation project(':autodispose-conductor')
     implementation project(':autodispose-view')
 

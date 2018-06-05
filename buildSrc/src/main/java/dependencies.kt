@@ -10,23 +10,21 @@ object Versions {
     const val versionName = "1.0"
 
     const val androidGradlePlugin = "3.1.2"
-    const val archComponents = "1.1.1"
+    const val archLifecycle = "1.1.1"
     const val conductor = "2.1.4"
-    const val conductorFork = "756066a981"
     const val kotlin = "1.2.41"
     const val mavenGradle = "2.1"
-    const val rxJava = "2.1.13"
+    const val rxJava = "2.1.14"
     const val support = "27.1.1"
 }
 //
 object Deps {
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
 
-    const val archComponentsCompiler = "android.arch.lifecycle:compiler:${Versions.archComponents}"
-    const val archComponentsRuntime = "android.arch.lifecycle:runtime:${Versions.archComponents}"
+    const val archLifecycleCompiler = "android.arch.lifecycle:compiler:${Versions.archLifecycle}"
+    const val archLifecycleRuntime = "android.arch.lifecycle:runtime:${Versions.archLifecycle}"
 
     const val conductor = "com.bluelinelabs:conductor:${Versions.conductor}"
-    const val conductorFork = "com.github.IVIanuu.Conductor:conductor:${Versions.conductorFork}"
 
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:${Versions.kotlin}"

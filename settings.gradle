@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-include ':sample', ':autodispose', ':autodispose', ':autodispose-view', ':autodispose-archcomponents', ':autodispose-conductor'
+include ':sample', ':autodispose', ':autodispose', ':autodispose-view', ':autodispose-arch', ':autodispose-conductor'

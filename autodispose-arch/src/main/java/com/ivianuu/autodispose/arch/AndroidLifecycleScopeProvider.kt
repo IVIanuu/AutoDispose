@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ivianuu.autodispose.archcomponents
+package com.ivianuu.autodispose.arch
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.Lifecycle.Event

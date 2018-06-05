@@ -21,7 +21,7 @@ import android.support.v7.app.AppCompatActivity
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
-import com.ivianuu.autodispose.archcomponents.autoDispose
+import com.ivianuu.autodispose.arch.autoDispose
 
 class MainActivity : AppCompatActivity() {
 
