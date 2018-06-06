@@ -56,7 +56,7 @@ class ViewScopeProvider private constructor(private val view: View) : ScopeProvi
 
     companion object {
 
-        fun from(view: View): ViewScopeProvider {
+        fun from(view: View): ScopeProvider {
             return ViewScopeProvider(view)
         }
 

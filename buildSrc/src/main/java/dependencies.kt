@@ -17,7 +17,7 @@ object Versions {
     const val rxJava = "2.1.14"
     const val support = "27.1.1"
 }
-//
+
 object Deps {
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
 

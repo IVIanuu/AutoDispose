@@ -115,7 +115,7 @@ class ControllerScopeProvider private constructor(controller: Controller) :
                 }
             }
 
-        fun from(controller: Controller): ControllerScopeProvider {
+        fun from(controller: Controller): LifecycleScopeProvider<ControllerEvent> {
             return ControllerScopeProvider(controller)
         }
     }
