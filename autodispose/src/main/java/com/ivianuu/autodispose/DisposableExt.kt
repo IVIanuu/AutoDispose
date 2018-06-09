@@ -20,12 +20,12 @@ import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 
-fun Disposable.autoDispose(scopeProvider: ScopeProvider) {
-    AutoDispose.autoDispose(this, scopeProvider)
-}
-
 fun Disposable.autoDispose(scope: Maybe<*>) {
     AutoDispose.autoDispose(this, scope)
+}
+
+fun Disposable.autoDispose(scopeProvider: ScopeProvider) {
+    AutoDispose.autoDispose(this, scopeProvider)
 }
 
 fun <T> Disposable.autoDispose(lifecycleScopeProvider: LifecycleScopeProvider<T>) {

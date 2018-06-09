@@ -16,13 +16,14 @@
 
 package com.ivianuu.autodispose
 
+import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.functions.Function
 
 /**
  * Lifecycle scope provider
  */
-interface LifecycleScopeProvider<T> {
+interface LifecycleScopeProvider<T> : ScopeProvider {
 
     fun lifecycle(): Observable<T>
 
@@ -30,4 +31,19 @@ interface LifecycleScopeProvider<T> {
 
     fun peekLifecycle(): T?
 
+    override fun requestScope(): Maybe<T> {
+        val currentEvent = peekLifecycle()
+                ?: throw OutsideLifecycleException("lifecycle has not started yet")
+
+        val untilEvent = correspondingEvents().apply(currentEvent)
+
+        return requestScope(untilEvent)
+    }
+
+    fun requestScope(untilEvent: T): Maybe<T> {
+        return lifecycle()
+            .filter { it == untilEvent }
+            .take(1)
+            .singleElement()
+    }
 }

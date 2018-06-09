@@ -25,23 +25,19 @@ import io.reactivex.disposables.Disposable
  */
 object AutoDispose {
 
-    fun autoDispose(disposable: Disposable, scopeProvider: ScopeProvider) {
-        autoDispose(disposable, scopeProvider.requestScope())
-    }
-
     fun autoDispose(disposable: Disposable, scope: Maybe<*>) {
         AutoDisposer(disposable, scope)
+    }
+
+    fun autoDispose(disposable: Disposable, scopeProvider: ScopeProvider) {
+        autoDispose(disposable, scopeProvider.requestScope())
     }
 
     fun <T> autoDispose(
         disposable: Disposable,
         lifecycleScopeProvider: LifecycleScopeProvider<T>
     ) {
-        val currentEvent = lifecycleScopeProvider.peekLifecycle() ?:
-        throw OutsideLifecycleException("lifecycle has not started yet")
-
-        val untilEvent = lifecycleScopeProvider.correspondingEvents().apply(currentEvent)
-        autoDispose(disposable, lifecycleScopeProvider, untilEvent)
+        autoDispose(disposable, lifecycleScopeProvider.requestScope())
     }
 
     fun <T> autoDispose(
@@ -49,7 +45,7 @@ object AutoDispose {
         lifecycleScopeProvider: LifecycleScopeProvider<T>,
         untilEvent: T
     ) {
-        autoDispose(disposable, lifecycleScopeProvider.lifecycle(), untilEvent)
+        autoDispose(disposable, lifecycleScopeProvider.requestScope(untilEvent))
     }
 
     fun <T> autoDispose(
