@@ -14,4 +14,11 @@
  * limitations under the License.
  */
 
-include ':sample', ':autodispose', ':autodispose', ':autodispose-view', ':autodispose-arch', ':autodispose-conductor', ':autodispose-navi-android'
+package com.ivianuu.autodispose.navi.android
+
+/**
+ * Events for [Fragment]'s
+ */
+enum class FragmentEvent {
+    ATTACH, CREATE, CREATE_VIEW, START, RESUME, PAUSE, STOP, DESTROY_VIEW, DESTROY, DETACH
+}

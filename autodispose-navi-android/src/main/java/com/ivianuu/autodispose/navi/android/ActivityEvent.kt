@@ -14,4 +14,11 @@
  * limitations under the License.
  */
 
-include ':sample', ':autodispose', ':autodispose', ':autodispose-view', ':autodispose-arch', ':autodispose-conductor', ':autodispose-navi-android'
+package com.ivianuu.autodispose.navi.android
+
+/**
+ * Events for [Activity]'s
+ */
+enum class ActivityEvent {
+    CREATE, START, RESUME, PAUSE, STOP, DESTROY
+}
