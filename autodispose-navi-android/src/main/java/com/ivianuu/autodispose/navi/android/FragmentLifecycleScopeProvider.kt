@@ -52,13 +52,13 @@ class FragmentLifecycleScopeProvider private constructor(
         val fragmentEvent = when(event) {
             is Attach -> ATTACH
             is Create -> CREATE
-            Start -> START
-            Resume -> RESUME
-            Pause -> PAUSE
-            Stop -> STOP
-            DestroyView -> DESTROY_VIEW
-            DESTROY -> DESTROY
-            DETACH -> DETACH
+            is Start -> START
+            is Resume -> RESUME
+            is Pause -> PAUSE
+            is Stop -> STOP
+            is DestroyView -> DESTROY_VIEW
+            is Destroy -> DESTROY
+            is Detach -> DETACH
             else -> null
         } ?: return
 
