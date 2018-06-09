@@ -53,10 +53,6 @@ object AutoDispose {
         lifecycle: Observable<T>,
         untilEvent: T
     ) {
-        val scope = lifecycle
-            .filter { it == untilEvent }
-            .take(1)
-            .singleElement()
-        autoDispose(disposable, scope)
+        autoDispose(disposable, LifecycleScopeUtil.getScope(lifecycle, untilEvent))
     }
 }

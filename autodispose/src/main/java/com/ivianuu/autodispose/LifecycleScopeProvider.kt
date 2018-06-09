@@ -32,18 +32,10 @@ interface LifecycleScopeProvider<T> : ScopeProvider {
     fun peekLifecycle(): T?
 
     override fun requestScope(): Maybe<T> {
-        val currentEvent = peekLifecycle()
-                ?: throw OutsideLifecycleException("lifecycle has not started yet")
-
-        val untilEvent = correspondingEvents().apply(currentEvent)
-
-        return requestScope(untilEvent)
+        return LifecycleScopeUtil.getScope(this)
     }
 
     fun requestScope(untilEvent: T): Maybe<T> {
-        return lifecycle()
-            .filter { it == untilEvent }
-            .take(1)
-            .singleElement()
+        return LifecycleScopeUtil.getScope(lifecycle(), untilEvent)
     }
 }
