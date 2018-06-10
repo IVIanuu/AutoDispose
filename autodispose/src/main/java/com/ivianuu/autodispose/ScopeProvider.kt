@@ -22,7 +22,5 @@ import io.reactivex.Maybe
  * Provides the scope for auto disposal
  */
 interface ScopeProvider {
-
     fun requestScope(): Maybe<*>
-
 }
