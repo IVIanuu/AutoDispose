@@ -14,27 +14,19 @@
  * limitations under the License.
  */
 
-package com.ivianuu.autodispose.sample
+package com.ivianuu.autodispose.android
 
-import android.content.Context
-import android.util.AttributeSet
+import android.os.Build
 import android.view.View
-import com.ivianuu.autodispose.android.autoDispose
 
 /**
  * @author Manuel Wrage (IVIanuu)
  */
-class TestView @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : View(context, attrs, defStyleAttr) {
+internal object AutoDisposeAndroidUtil {
 
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-
-        testObservable()
-            .subscribe()
-            .autoDispose(this)
+    fun isAttached(view: View): Boolean {
+        return (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && view.isAttachedToWindow)
+                || view.windowToken != null
     }
 
 }

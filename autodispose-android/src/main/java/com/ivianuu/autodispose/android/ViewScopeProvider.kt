@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.ivianuu.autodispose.view
+package com.ivianuu.autodispose.android
 
-import android.os.Build
 import android.view.View
 import com.ivianuu.autodispose.OutsideLifecycleException
 import com.ivianuu.autodispose.ScopeProvider
@@ -28,9 +27,7 @@ import io.reactivex.Maybe
 class ViewScopeProvider private constructor(private val view: View) : ScopeProvider {
 
     override fun requestScope(): Maybe<*> {
-        val isAttached =
-        (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && view.isAttachedToWindow)
-                || view.windowToken != null
+        val isAttached = AutoDisposeAndroidUtil.isAttached(view)
 
         if (!isAttached) {
             throw OutsideLifecycleException("view not attached")

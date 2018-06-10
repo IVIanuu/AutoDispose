@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.ivianuu.autodispose.view
+package com.ivianuu.autodispose.android
 
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import com.ivianuu.autodispose.LifecycleScopeProvider
-import com.ivianuu.autodispose.view.ActivityEvent.*
+import com.ivianuu.autodispose.android.ActivityEvent.*
 import io.reactivex.functions.Function
 import io.reactivex.subjects.BehaviorSubject
 

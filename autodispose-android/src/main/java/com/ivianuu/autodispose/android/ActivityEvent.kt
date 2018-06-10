@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ivianuu.autodispose.view
+package com.ivianuu.autodispose.android
 
 /**
  * Events for [Activity]'s
