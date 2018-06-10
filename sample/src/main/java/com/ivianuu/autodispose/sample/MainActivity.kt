@@ -24,6 +24,7 @@ import com.bluelinelabs.conductor.RouterTransaction
 import com.ivianuu.autodispose.ScopeProviders
 import com.ivianuu.autodispose.arch.autoDispose
 import com.ivianuu.autodispose.arch.from
+import com.ivianuu.autodispose.arch.scope
 import com.ivianuu.autodispose.autoDispose
 
 class MainActivity : AppCompatActivity() {
@@ -47,6 +48,10 @@ class MainActivity : AppCompatActivity() {
         testObservable()
             .subscribe()
             .autoDispose(ScopeProviders.from(this))
+
+        testObservable()
+            .subscribe()
+            .autoDispose(scope())
 
         testObservable()
             .subscribe()

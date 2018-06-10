@@ -20,7 +20,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bluelinelabs.conductor.Controller
+import com.ivianuu.autodispose.ScopeProviders
+import com.ivianuu.autodispose.autoDispose
 import com.ivianuu.autodispose.conductor.autoDispose
+import com.ivianuu.autodispose.conductor.from
+import com.ivianuu.autodispose.conductor.scope
 
 /**
  * @author Manuel Wrage (IVIanuu)
@@ -28,6 +32,14 @@ import com.ivianuu.autodispose.conductor.autoDispose
 class TestController : Controller() {
 
     init {
+        testObservable()
+            .subscribe()
+            .autoDispose(ScopeProviders.from(this))
+
+        testObservable()
+            .subscribe()
+            .autoDispose(scope())
+
         testObservable()
             .subscribe()
             .autoDispose(this)
