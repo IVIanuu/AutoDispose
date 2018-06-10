@@ -29,6 +29,7 @@ import io.reactivex.subjects.BehaviorSubject
 
 /**
  * A [LifecycleScopeProvider] for [Fragment]'s
+ * Should be used as a local variable and should be instantiated pre on create
  */
 class FragmentLifecycleScopeProvider private constructor(
     naviComponent: NaviComponent
