@@ -21,7 +21,10 @@ import android.support.v7.app.AppCompatActivity
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
+import com.ivianuu.autodispose.ScopeProviders
 import com.ivianuu.autodispose.arch.autoDispose
+import com.ivianuu.autodispose.arch.from
+import com.ivianuu.autodispose.autoDispose
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,6 +43,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
+        testObservable()
+            .subscribe()
+            .autoDispose(ScopeProviders.from(this))
 
         testObservable()
             .subscribe()

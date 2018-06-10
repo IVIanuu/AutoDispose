@@ -35,6 +35,7 @@ dependencies {
     implementation project(':autodispose-arch')
     implementation project(':autodispose-conductor')
     implementation project(':autodispose-android')
+    implementation project(':autodispose-navi-android')
 
     implementation Deps.kotlinStdLib
 }

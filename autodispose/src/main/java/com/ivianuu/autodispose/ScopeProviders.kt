@@ -14,17 +14,9 @@
  * limitations under the License.
  */
 
-package com.ivianuu.autodispose.arch
+package com.ivianuu.autodispose
 
-import android.arch.lifecycle.Lifecycle.Event
-import android.arch.lifecycle.LifecycleOwner
-import com.ivianuu.autodispose.autoDispose
-import io.reactivex.disposables.Disposable
-
-fun Disposable.autoDispose(owner: LifecycleOwner) {
-    autoDispose(AndroidLifecycleScopeProvider.from(owner))
-}
-
-fun Disposable.autoDispose(owner: LifecycleOwner, untilEvent: Event) {
-    autoDispose(AndroidLifecycleScopeProvider.from(owner), untilEvent)
-}
+/**
+ * Factory class for [ScopeProvider]'s and [LifecycleScopeProvider]'s
+ */
+object ScopeProviders

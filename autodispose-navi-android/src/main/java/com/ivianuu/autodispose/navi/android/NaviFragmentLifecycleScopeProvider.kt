@@ -31,7 +31,7 @@ import io.reactivex.subjects.BehaviorSubject
  * A [LifecycleScopeProvider] for [Fragment]'s
  * Should be used as a local variable and should be instantiated pre on create
  */
-class FragmentLifecycleScopeProvider private constructor(
+class NaviFragmentLifecycleScopeProvider private constructor(
     naviComponent: NaviComponent
 ) : Listener<Any>, LifecycleScopeProvider<FragmentEvent> {
 
@@ -90,7 +90,7 @@ class FragmentLifecycleScopeProvider private constructor(
         }
 
         fun <T> from(fragment: T): LifecycleScopeProvider<FragmentEvent> where T : Fragment, T : NaviComponent {
-            return FragmentLifecycleScopeProvider(fragment)
+            return NaviFragmentLifecycleScopeProvider(fragment)
         }
 
     }

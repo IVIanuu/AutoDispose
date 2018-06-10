@@ -14,12 +14,24 @@
  * limitations under the License.
  */
 
-package com.ivianuu.autodispose.android
+package com.ivianuu.autodispose.conductor
 
-import android.view.View
+import com.bluelinelabs.conductor.Controller
+import com.ivianuu.autodispose.LifecycleScopeProvider
+import com.ivianuu.autodispose.ScopeProviders
 import com.ivianuu.autodispose.autoDispose
 import io.reactivex.disposables.Disposable
 
-fun Disposable.autoDispose(view: View) {
-    autoDispose(ViewScopeProvider.from(view))
+fun ScopeProviders.from(controller: Controller): LifecycleScopeProvider<ControllerEvent> {
+    return ControllerScopeProvider.from(controller)
+}
+
+fun Controller.scope() = ScopeProviders.from(this)
+
+fun Disposable.autoDispose(controller: Controller) {
+    autoDispose(ScopeProviders.from(controller))
+}
+
+fun Disposable.autoDispose(controller: Controller, event: ControllerEvent) {
+    autoDispose(ScopeProviders.from(controller), event)
 }
