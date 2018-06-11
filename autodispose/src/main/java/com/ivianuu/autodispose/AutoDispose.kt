@@ -24,10 +24,10 @@ import io.reactivex.parallel.ParallelFlowable
  */
 object AutoDispose {
 
-    fun <T> autoDisposable(scope: Maybe<*>): AutoDisposeConverter<T> =
+    fun <T : Any> autoDisposable(scope: Maybe<*>): AutoDisposeConverter<T> =
         AutoDisposeConverterImpl(scope)
 
-    fun <T> autoDisposable(scopeProvider: ScopeProvider): AutoDisposeConverter<T> =
+    fun <T : Any> autoDisposable(scopeProvider: ScopeProvider): AutoDisposeConverter<T> =
         autoDisposable(scopeProvider.requestScope())
 
 }
@@ -35,35 +35,35 @@ object AutoDispose {
 fun Completable.autoDisposable(scope: Maybe<*>) =
     `as`(AutoDispose.autoDisposable<Any>(scope))
 
-fun <T> Flowable<T>.autoDisposable(scope: Maybe<*>) =
+fun <T : Any> Flowable<T>.autoDisposable(scope: Maybe<*>) =
     `as`(AutoDispose.autoDisposable<T>(scope))
 
-fun <T> Maybe<T>.autoDisposable(scope: Maybe<*>) =
+fun <T : Any> Maybe<T>.autoDisposable(scope: Maybe<*>) =
     `as`(AutoDispose.autoDisposable<T>(scope))
 
-fun <T> Observable<T>.autoDisposable(scope: Maybe<*>) =
+fun <T : Any> Observable<T>.autoDisposable(scope: Maybe<*>) =
     `as`(AutoDispose.autoDisposable<T>(scope))
 
-fun <T> ParallelFlowable<T>.autoDisposable(scope: Maybe<*>) =
+fun <T : Any> ParallelFlowable<T>.autoDisposable(scope: Maybe<*>) =
     `as`(AutoDispose.autoDisposable<T>(scope))
 
-fun <T> Single<T>.autoDisposable(scope: Maybe<*>) =
+fun <T : Any> Single<T>.autoDisposable(scope: Maybe<*>) =
     `as`(AutoDispose.autoDisposable<T>(scope))
 
 fun Completable.autoDisposable(provider: ScopeProvider) =
     `as`(AutoDispose.autoDisposable<Any>(provider))
 
-fun <T> Flowable<T>.autoDisposable(provider: ScopeProvider) =
+fun <T : Any> Flowable<T>.autoDisposable(provider: ScopeProvider) =
     `as`(AutoDispose.autoDisposable<T>(provider))
 
-fun <T> Maybe<T>.autoDisposable(provider: ScopeProvider) =
+fun <T : Any> Maybe<T>.autoDisposable(provider: ScopeProvider) =
     `as`(AutoDispose.autoDisposable<T>(provider))
 
-fun <T> Observable<T>.autoDisposable(provider: ScopeProvider) =
+fun <T : Any> Observable<T>.autoDisposable(provider: ScopeProvider) =
     `as`(AutoDispose.autoDisposable<T>(provider))
 
-fun <T> ParallelFlowable<T>.autoDisposable(provider: ScopeProvider) =
+fun <T : Any> ParallelFlowable<T>.autoDisposable(provider: ScopeProvider) =
     `as`(AutoDispose.autoDisposable<T>(provider))
 
-fun <T> Single<T>.autoDisposable(provider: ScopeProvider) =
+fun <T : Any> Single<T>.autoDisposable(provider: ScopeProvider) =
     `as`(AutoDispose.autoDisposable<T>(provider))

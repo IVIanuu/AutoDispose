@@ -33,24 +33,24 @@ fun View.scope() = ScopeProviders.from(this)
 
 fun Completable.autoDisposable(dialog: Dialog) = autoDisposable(dialog.scope())
 
-fun <T> Flowable<T>.autoDisposable(dialog: Dialog) = autoDisposable(dialog.scope())
+fun <T : Any> Flowable<T>.autoDisposable(dialog: Dialog) = autoDisposable(dialog.scope())
 
-fun <T> Maybe<T>.autoDisposable(dialog: Dialog) = autoDisposable(dialog.scope())
+fun <T : Any> Maybe<T>.autoDisposable(dialog: Dialog) = autoDisposable(dialog.scope())
 
-fun <T> Observable<T>.autoDisposable(dialog: Dialog) = autoDisposable(dialog.scope())
+fun <T : Any> Observable<T>.autoDisposable(dialog: Dialog) = autoDisposable(dialog.scope())
 
-fun <T> ParallelFlowable<T>.autoDisposable(dialog: Dialog) = autoDisposable(dialog.scope())
+fun <T : Any> ParallelFlowable<T>.autoDisposable(dialog: Dialog) = autoDisposable(dialog.scope())
 
-fun <T> Single<T>.autoDisposable(dialog: Dialog) = autoDisposable(dialog.scope())
+fun <T : Any> Single<T>.autoDisposable(dialog: Dialog) = autoDisposable(dialog.scope())
 
 fun Completable.autoDisposable(view: View) = autoDisposable(view.scope())
 
-fun <T> Flowable<T>.autoDisposable(view: View) = autoDisposable(view.scope())
+fun <T : Any> Flowable<T>.autoDisposable(view: View) = autoDisposable(view.scope())
 
-fun <T> Maybe<T>.autoDisposable(view: View) = autoDisposable(view.scope())
+fun <T : Any> Maybe<T>.autoDisposable(view: View) = autoDisposable(view.scope())
 
-fun <T> Observable<T>.autoDisposable(view: View) = autoDisposable(view.scope())
+fun <T : Any> Observable<T>.autoDisposable(view: View) = autoDisposable(view.scope())
 
-fun <T> ParallelFlowable<T>.autoDisposable(view: View) = autoDisposable(view.scope())
+fun <T : Any> ParallelFlowable<T>.autoDisposable(view: View) = autoDisposable(view.scope())
 
-fun <T> Single<T>.autoDisposable(view: View) = autoDisposable(view.scope())
+fun <T : Any> Single<T>.autoDisposable(view: View) = autoDisposable(view.scope())

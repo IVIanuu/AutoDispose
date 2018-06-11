@@ -30,24 +30,32 @@ fun LifecycleOwner.scope() = ScopeProviders.from(this)
 
 fun Completable.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
 
-fun <T> Flowable<T>.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
+fun <T : Any> Flowable<T>.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
 
-fun <T> Maybe<T>.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
+fun <T : Any> Maybe<T>.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
 
-fun <T> Observable<T>.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
+fun <T : Any> Observable<T>.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
 
-fun <T> ParallelFlowable<T>.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
+fun <T : Any> ParallelFlowable<T>.autoDisposable(owner: LifecycleOwner) =
+    autoDisposable(owner.scope())
 
-fun <T> Single<T>.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
+fun <T : Any> Single<T>.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
 
 fun Completable.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) = autoDisposable(owner.scope(), untilEvent)
 
-fun <T> Flowable<T>.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) = autoDisposable(owner.scope(), untilEvent)
+fun <T : Any> Flowable<T>.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) =
+    autoDisposable(owner.scope(), untilEvent)
 
-fun <T> Maybe<T>.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) = autoDisposable(owner.scope(), untilEvent)
+fun <T : Any> Maybe<T>.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) =
+    autoDisposable(owner.scope(), untilEvent)
 
-fun <T> Observable<T>.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) = autoDisposable(owner.scope(), untilEvent)
+fun <T : Any> Observable<T>.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) =
+    autoDisposable(owner.scope(), untilEvent)
 
-fun <T> ParallelFlowable<T>.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) = autoDisposable(owner.scope(), untilEvent)
+fun <T : Any> ParallelFlowable<T>.autoDisposable(
+    owner: LifecycleOwner,
+    untilEvent: Lifecycle.Event
+) = autoDisposable(owner.scope(), untilEvent)
 
-fun <T> Single<T>.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) = autoDisposable(owner.scope(), untilEvent)
+fun <T : Any> Single<T>.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) =
+    autoDisposable(owner.scope(), untilEvent)

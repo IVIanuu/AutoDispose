@@ -32,14 +32,14 @@ import org.reactivestreams.Subscription
 /**
  * @author Manuel Wrage (IVIanuu)
  */
-interface AutoDisposeConverter<T> : CompletableConverter<CompletableSubscribeProxy>,
+interface AutoDisposeConverter<T : Any> : CompletableConverter<CompletableSubscribeProxy>,
     FlowableConverter<T, FlowableSubscribeProxy<T>>,
     MaybeConverter<T, MaybeSubscribeProxy<T>>,
     ObservableConverter<T, ObservableSubscribeProxy<T>>,
     ParallelFlowableConverter<T, ParallelFlowableSubscribeProxy<T>>,
     SingleConverter<T, SingleSubscribeProxy<T>>
 
-class AutoDisposeConverterImpl<T>(private val scope: Maybe<*>) :
+class AutoDisposeConverterImpl<T : Any>(private val scope: Maybe<*>) :
     AutoDisposeConverter<T> {
     override fun apply(upstream: Completable): CompletableSubscribeProxy {
         return object : CompletableSubscribeProxy {

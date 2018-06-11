@@ -29,30 +29,36 @@ fun Controller.scope() = ScopeProviders.from(this)
 
 fun Completable.autoDisposable(controller: Controller) = autoDisposable(controller.scope())
 
-fun <T> Flowable<T>.autoDisposable(controller: Controller) = autoDisposable(controller.scope())
+fun <T : Any> Flowable<T>.autoDisposable(controller: Controller) =
+    autoDisposable(controller.scope())
 
-fun <T> Maybe<T>.autoDisposable(controller: Controller) = autoDisposable(controller.scope())
+fun <T : Any> Maybe<T>.autoDisposable(controller: Controller) = autoDisposable(controller.scope())
 
-fun <T> Observable<T>.autoDisposable(controller: Controller) = autoDisposable(controller.scope())
+fun <T : Any> Observable<T>.autoDisposable(controller: Controller) =
+    autoDisposable(controller.scope())
 
-fun <T> ParallelFlowable<T>.autoDisposable(controller: Controller) = autoDisposable(controller.scope())
+fun <T : Any> ParallelFlowable<T>.autoDisposable(controller: Controller) =
+    autoDisposable(controller.scope())
 
-fun <T> Single<T>.autoDisposable(controller: Controller) = autoDisposable(controller.scope())
+fun <T : Any> Single<T>.autoDisposable(controller: Controller) = autoDisposable(controller.scope())
 
 fun Completable.autoDisposable(controller: Controller, untilEvent: ControllerEvent) =
     autoDisposable(controller.scope(), untilEvent)
 
-fun <T> Flowable<T>.autoDisposable(controller: Controller, untilEvent: ControllerEvent) =
+fun <T : Any> Flowable<T>.autoDisposable(controller: Controller, untilEvent: ControllerEvent) =
     autoDisposable(controller.scope(), untilEvent)
 
-fun <T> Maybe<T>.autoDisposable(controller: Controller, untilEvent: ControllerEvent) =
+fun <T : Any> Maybe<T>.autoDisposable(controller: Controller, untilEvent: ControllerEvent) =
     autoDisposable(controller.scope(), untilEvent)
 
-fun <T> Observable<T>.autoDisposable(controller: Controller, untilEvent: ControllerEvent) =
+fun <T : Any> Observable<T>.autoDisposable(controller: Controller, untilEvent: ControllerEvent) =
     autoDisposable(controller.scope(), untilEvent)
 
-fun <T> ParallelFlowable<T>.autoDisposable(controller: Controller, untilEvent: ControllerEvent) =
+fun <T : Any> ParallelFlowable<T>.autoDisposable(
+    controller: Controller,
+    untilEvent: ControllerEvent
+) =
     autoDisposable(controller.scope(), untilEvent)
 
-fun <T> Single<T>.autoDisposable(controller: Controller, untilEvent: ControllerEvent) =
+fun <T : Any> Single<T>.autoDisposable(controller: Controller, untilEvent: ControllerEvent) =
     autoDisposable(controller.scope(), untilEvent)
