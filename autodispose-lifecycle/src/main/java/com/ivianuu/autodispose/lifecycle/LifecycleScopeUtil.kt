@@ -16,6 +16,7 @@
 
 package com.ivianuu.autodispose.lifecycle
 
+import com.ivianuu.autodispose.AutoDisposePlugins
 import com.ivianuu.autodispose.LifecycleNotStartedException
 import io.reactivex.Maybe
 import io.reactivex.Observable
@@ -25,20 +26,31 @@ import io.reactivex.Observable
  */
 internal object LifecycleScopeUtil {
 
-    fun <T> getScope(lifecycleScopeProvider: LifecycleScopeProvider<T>): Maybe<T> {
+    fun <T> getScope(lifecycleScopeProvider: LifecycleScopeProvider<T>): Maybe<*> {
         val currentEvent = lifecycleScopeProvider.peekLifecycle()
-                ?: throw LifecycleNotStartedException()
+
+        val exception = LifecycleNotStartedException()
+
+        if (currentEvent == null) {
+            val handler = AutoDisposePlugins.outsideLifecycleHandler
+            if (handler != null) {
+                handler.accept(exception)
+                return Maybe.just(Unit)
+            } else {
+                throw exception
+            }
+        }
 
         val untilEvent = lifecycleScopeProvider.correspondingEvents().apply(currentEvent)
 
         return getScope(lifecycleScopeProvider, untilEvent)
     }
 
-    fun <T> getScope(lifecycleScopeProvider: LifecycleScopeProvider<T>, untilEvent: T): Maybe<T> {
+    fun <T> getScope(lifecycleScopeProvider: LifecycleScopeProvider<T>, untilEvent: T): Maybe<*> {
         return getScope(lifecycleScopeProvider.lifecycle(), untilEvent)
     }
 
-    fun <T> getScope(lifecycle: Observable<T>, untilEvent: T): Maybe<T> {
+    fun <T> getScope(lifecycle: Observable<T>, untilEvent: T): Maybe<*> {
         return lifecycle
             .filter { it == untilEvent }
             .take(1)

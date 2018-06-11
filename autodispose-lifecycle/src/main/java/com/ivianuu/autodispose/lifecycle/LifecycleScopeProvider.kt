@@ -32,11 +32,11 @@ interface LifecycleScopeProvider<T> : ScopeProvider {
 
     fun peekLifecycle(): T?
 
-    override fun requestScope(): Maybe<T> {
+    override fun requestScope(): Maybe<*> {
         return LifecycleScopeUtil.getScope(this)
     }
 
-    fun requestScope(untilEvent: T): Maybe<T> {
+    fun requestScope(untilEvent: T): Maybe<*> {
         return LifecycleScopeUtil.getScope(lifecycle(), untilEvent)
     }
 }
