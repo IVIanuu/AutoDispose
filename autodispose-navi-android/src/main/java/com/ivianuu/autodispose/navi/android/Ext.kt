@@ -19,14 +19,35 @@ package com.ivianuu.autodispose.navi.android
 import android.app.Activity
 import android.support.v4.app.Fragment
 import com.ivianuu.autodispose.ScopeProviders
+import com.ivianuu.autodispose.autoDispose
+import com.ivianuu.autodispose.lifecycle.autoDispose
 import com.ivianuu.navi.NaviComponent
+import io.reactivex.disposables.Disposable
 
-fun <N> ScopeProviders.from(naviActivity: N) where N : Activity, N : NaviComponent =
+fun <T> ScopeProviders.from(naviActivity: T) where T : Activity, T : NaviComponent =
     NaviActivityLifecycleScopeProvider.from(naviActivity)
 
-fun <N> ScopeProviders.from(naviFragment: N) where N : Fragment, N : NaviComponent =
+fun <T> ScopeProviders.from(naviFragment: T) where T : Fragment, T : NaviComponent =
     NaviFragmentLifecycleScopeProvider.from(naviFragment)
 
-fun <N> N.scope()where N : Activity, N : NaviComponent = ScopeProviders.from(this)
+fun <T> T.scope() where T : Activity, T : NaviComponent = ScopeProviders.from(this)
 
-fun <N> N.scope()where N : Fragment, N : NaviComponent = ScopeProviders.from(this)
+fun <T> T.scope() where T : Fragment, T : NaviComponent = ScopeProviders.from(this)
+
+fun <T> Disposable.autoDispose(naviActivity: T) where T : Activity, T : NaviComponent =
+    autoDispose(naviActivity.scope())
+
+fun <T> Disposable.autoDispose(
+    naviActivity: T,
+    untilEvent: ActivityEvent
+) where T : Activity, T : NaviComponent =
+    autoDispose(naviActivity.scope(), untilEvent)
+
+fun <T> Disposable.autoDispose(naviFragment: T) where T : Fragment, T : NaviComponent =
+    autoDispose(naviFragment.scope())
+
+fun <T> Disposable.autoDispose(
+    naviFragment: T,
+    untilEvent: FragmentEvent
+) where T : Fragment, T : NaviComponent =
+    autoDispose(naviFragment.scope(), untilEvent)

@@ -16,54 +16,17 @@
 
 package com.ivianuu.autodispose
 
-import io.reactivex.*
-import io.reactivex.parallel.ParallelFlowable
+import io.reactivex.Maybe
+import io.reactivex.disposables.Disposable
 
 /**
  * Auto dispose
  */
 object AutoDispose {
 
-    fun <T : Any> autoDisposable(scope: Maybe<*>): AutoDisposeConverter<T> =
-        AutoDisposeConverterImpl(scope)
+    fun autoDispose(disposable: Disposable, scope: Maybe<*>): Disposable =
+        AutoDisposable(disposable, scope)
 
-    fun <T : Any> autoDisposable(scopeProvider: ScopeProvider): AutoDisposeConverter<T> =
-        autoDisposable(scopeProvider.requestScope())
-
+    fun autoDispose(disposable: Disposable, provider: ScopeProvider) =
+        autoDispose(disposable, provider.requestScope())
 }
-
-fun Completable.autoDisposable(scope: Maybe<*>) =
-    `as`(AutoDispose.autoDisposable<Any>(scope))
-
-fun <T : Any> Flowable<T>.autoDisposable(scope: Maybe<*>) =
-    `as`(AutoDispose.autoDisposable<T>(scope))
-
-fun <T : Any> Maybe<T>.autoDisposable(scope: Maybe<*>) =
-    `as`(AutoDispose.autoDisposable<T>(scope))
-
-fun <T : Any> Observable<T>.autoDisposable(scope: Maybe<*>) =
-    `as`(AutoDispose.autoDisposable<T>(scope))
-
-fun <T : Any> ParallelFlowable<T>.autoDisposable(scope: Maybe<*>) =
-    `as`(AutoDispose.autoDisposable<T>(scope))
-
-fun <T : Any> Single<T>.autoDisposable(scope: Maybe<*>) =
-    `as`(AutoDispose.autoDisposable<T>(scope))
-
-fun Completable.autoDisposable(provider: ScopeProvider) =
-    `as`(AutoDispose.autoDisposable<Any>(provider))
-
-fun <T : Any> Flowable<T>.autoDisposable(provider: ScopeProvider) =
-    `as`(AutoDispose.autoDisposable<T>(provider))
-
-fun <T : Any> Maybe<T>.autoDisposable(provider: ScopeProvider) =
-    `as`(AutoDispose.autoDisposable<T>(provider))
-
-fun <T : Any> Observable<T>.autoDisposable(provider: ScopeProvider) =
-    `as`(AutoDispose.autoDisposable<T>(provider))
-
-fun <T : Any> ParallelFlowable<T>.autoDisposable(provider: ScopeProvider) =
-    `as`(AutoDispose.autoDisposable<T>(provider))
-
-fun <T : Any> Single<T>.autoDisposable(provider: ScopeProvider) =
-    `as`(AutoDispose.autoDisposable<T>(provider))

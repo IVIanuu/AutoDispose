@@ -14,23 +14,13 @@
  * limitations under the License.
  */
 
-package com.ivianuu.autodispose.internal
+package com.ivianuu.autodispose
 
 import io.reactivex.Maybe
-import io.reactivex.parallel.ParallelFlowable
-import org.reactivestreams.Subscriber
+import io.reactivex.disposables.Disposable
 
-internal class AutoDisposeParallelFlowable<T>(
-    private val source: ParallelFlowable<T>,
-    private val scope: Maybe<*>
-) : ParallelFlowable<T>() {
-    override fun subscribe(subscribers: Array<out Subscriber<in T>>) {
-        val newSubscribers = subscribers
-            .map { AutoDisposeSubscriber(it, scope) }
-            .toTypedArray()
+fun Disposable.autoDispose(scope: Maybe<*>) =
+    AutoDispose.autoDispose(this, scope)
 
-        source.subscribe(newSubscribers)
-    }
-
-    override fun parallelism() = source.parallelism()
-}
+fun Disposable.autoDispose(provider: ScopeProvider) =
+    AutoDispose.autoDispose(this, provider)

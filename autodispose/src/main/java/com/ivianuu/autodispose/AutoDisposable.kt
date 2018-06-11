@@ -14,14 +14,11 @@
  * limitations under the License.
  */
 
-package com.ivianuu.autodispose.internal
+package com.ivianuu.autodispose
 
 import io.reactivex.Maybe
 import io.reactivex.disposables.Disposable
 import io.reactivex.internal.disposables.DisposableHelper
-import io.reactivex.internal.subscriptions.SubscriptionHelper
-import org.reactivestreams.Subscription
-import java.util.concurrent.atomic.AtomicLong
 import java.util.concurrent.atomic.AtomicReference
 
 internal class AutoDisposable(
@@ -39,23 +36,4 @@ internal class AutoDisposable(
         DisposableHelper.dispose(scopeDisposable)
     }
 
-}
-
-internal class AutoSubscription(
-    mainSubscription: Subscription,
-    scope: Maybe<*>
-) : Subscription {
-
-    private val mainSubscription = AtomicReference<Subscription?>(mainSubscription)
-    private val scopeDisposable = AtomicReference<Disposable?>(scope.subscribe { cancel() })
-    private val requested = AtomicLong()
-
-    override fun request(n: Long) {
-        SubscriptionHelper.deferredRequest(mainSubscription, requested, n)
-    }
-
-    override fun cancel() {
-        SubscriptionHelper.cancel(mainSubscription)
-        DisposableHelper.dispose(scopeDisposable)
-    }
 }

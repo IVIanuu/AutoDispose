@@ -17,54 +17,25 @@
 package com.ivianuu.autodispose.lifecycle
 
 import com.ivianuu.autodispose.AutoDispose
-import io.reactivex.*
-import io.reactivex.parallel.ParallelFlowable
+import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
 
-fun <T : Any, E> AutoDispose.autoDisposable(
-    provider: LifecycleScopeProvider<E>,
-    untilEvent: E
-) = autoDisposable<T>(provider.requestScope(untilEvent))
+fun <T> AutoDispose.autoDispose(
+    disposable: Disposable,
+    provider: LifecycleScopeProvider<T>,
+    untilEvent: T
+) = autoDispose(disposable, provider.requestScope(untilEvent))
 
-fun <T : Any, E> AutoDispose.autoDisposable(
-    lifecycle: Observable<E>,
-    untilEvent: E
-) = autoDisposable<T>(LifecycleScopeUtil.getScope(lifecycle, untilEvent))
+fun <T> AutoDispose.autoDispose(
+    disposable: Disposable,
+    lifecycle: Observable<T>,
+    untilEvent: T
+) = autoDispose(disposable, LifecycleScopeUtil.getScope(lifecycle, untilEvent))
 
-fun <E> Completable.autoDisposable(provider: LifecycleScopeProvider<E>, untilEvent: E) =
-    `as`(AutoDispose.autoDisposable<Any, E>(provider, untilEvent))
+fun <T> Disposable.autoDispose(
+    provider: LifecycleScopeProvider<T>,
+    untilEvent: T
+) = AutoDispose.autoDispose(this, provider, untilEvent)
 
-fun <T : Any, E> Flowable<T>.autoDisposable(provider: LifecycleScopeProvider<E>, untilEvent: E) =
-    `as`(AutoDispose.autoDisposable<T, E>(provider, untilEvent))
-
-fun <T : Any, E> Maybe<T>.autoDisposable(provider: LifecycleScopeProvider<E>, untilEvent: E) =
-    `as`(AutoDispose.autoDisposable<T, E>(provider, untilEvent))
-
-fun <T : Any, E> Observable<T>.autoDisposable(provider: LifecycleScopeProvider<E>, untilEvent: E) =
-    `as`(AutoDispose.autoDisposable<T, E>(provider, untilEvent))
-
-fun <T : Any, E> ParallelFlowable<T>.autoDisposable(
-    provider: LifecycleScopeProvider<E>,
-    untilEvent: E
-) =
-    `as`(AutoDispose.autoDisposable<T, E>(provider, untilEvent))
-
-fun <T : Any, E> Single<T>.autoDisposable(provider: LifecycleScopeProvider<E>, untilEvent: E) =
-    `as`(AutoDispose.autoDisposable<T, E>(provider, untilEvent))
-
-fun <E> Completable.autoDisposable(lifecycle: Observable<E>, untilEvent: E) =
-    `as`(AutoDispose.autoDisposable<Any, E>(lifecycle, untilEvent))
-
-fun <T : Any, E> Flowable<T>.autoDisposable(lifecycle: Observable<E>, untilEvent: E) =
-    `as`(AutoDispose.autoDisposable<T, E>(lifecycle, untilEvent))
-
-fun <T : Any, E> Maybe<T>.autoDisposable(lifecycle: Observable<E>, untilEvent: E) =
-    `as`(AutoDispose.autoDisposable<T, E>(lifecycle, untilEvent))
-
-fun <T : Any, E> Observable<T>.autoDisposable(lifecycle: Observable<E>, untilEvent: E) =
-    `as`(AutoDispose.autoDisposable<T, E>(lifecycle, untilEvent))
-
-fun <T : Any, E> ParallelFlowable<T>.autoDisposable(lifecycle: Observable<E>, untilEvent: E) =
-    `as`(AutoDispose.autoDisposable<T, E>(lifecycle, untilEvent))
-
-fun <T : Any, E> Single<T>.autoDisposable(lifecycle: Observable<E>, untilEvent: E) =
-    `as`(AutoDispose.autoDisposable<T, E>(lifecycle, untilEvent))
+fun <T> Disposable.autoDispose(lifecycle: Observable<T>, untilEvent: T) =
+    AutoDispose.autoDispose(this, lifecycle, untilEvent)
