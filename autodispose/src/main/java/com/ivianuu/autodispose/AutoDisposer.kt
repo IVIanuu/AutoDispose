@@ -36,8 +36,7 @@ internal class AutoDisposer(
     override fun isDisposed() = isDisposed.get()
 
     override fun dispose() {
-        if (!isDisposed()) {
-            isDisposed.set(true)
+        if (!isDisposed.getAndSet(true)) {
             mainDisposable.getAndSet(null)?.dispose()
             scopeDisposable.getAndSet(null)?.dispose()
         }
