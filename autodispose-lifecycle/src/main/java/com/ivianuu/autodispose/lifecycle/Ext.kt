@@ -16,21 +16,26 @@
 
 package com.ivianuu.autodispose.lifecycle
 
-import com.ivianuu.autodispose.autoDispose
+import com.ivianuu.autodispose.AutoDispose
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 
-fun <T> Disposable.autoDispose(lifecycleScopeProvider: LifecycleScopeProvider<T>) {
-    autoDispose(lifecycleScopeProvider)
-}
+fun <T> AutoDispose.autoDispose(
+    disposable: Disposable,
+    provider: LifecycleScopeProvider<T>,
+    untilEvent: T
+) = autoDispose(disposable, provider.requestScope(untilEvent))
+
+fun <T> AutoDispose.autoDispose(
+    disposable: Disposable,
+    lifecycle: Observable<T>,
+    untilEvent: T
+) = autoDispose(disposable, LifecycleScopeUtil.getScope(lifecycle, untilEvent))
 
 fun <T> Disposable.autoDispose(
-    lifecycleScopeProvider: LifecycleScopeProvider<T>,
+    provider: LifecycleScopeProvider<T>,
     untilEvent: T
-) {
-    autoDispose(lifecycleScopeProvider, untilEvent)
-}
+) = AutoDispose.autoDispose(this, provider, untilEvent)
 
-fun <T> Disposable.autoDispose(lifecycle: Observable<T>, untilEvent: T) {
-    autoDispose(LifecycleScopeUtil.getScope(lifecycle, untilEvent))
-}
+fun <T> Disposable.autoDispose(lifecycle: Observable<T>, untilEvent: T) =
+        AutoDispose.autoDispose(this, lifecycle, untilEvent)

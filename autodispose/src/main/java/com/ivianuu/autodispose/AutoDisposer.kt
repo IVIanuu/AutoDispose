@@ -18,6 +18,7 @@ package com.ivianuu.autodispose
 
 import io.reactivex.Maybe
 import io.reactivex.disposables.Disposable
+import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
 
 /**
@@ -26,14 +27,20 @@ import java.util.concurrent.atomic.AtomicReference
 internal class AutoDisposer(
     mainDisposable: Disposable,
     scope: Maybe<*>
-) {
+) : Disposable {
 
+    private val isDisposed = AtomicBoolean(false)
     private val mainDisposable = AtomicReference<Disposable?>(mainDisposable)
     private val scopeDisposable = AtomicReference<Disposable?>(scope.subscribe { dispose() })
 
-    private fun dispose() {
-        mainDisposable.getAndSet(null)?.dispose()
-        scopeDisposable.getAndSet(null)?.dispose()
+    override fun isDisposed() = isDisposed.get()
+
+    override fun dispose() {
+        if (!isDisposed()) {
+            isDisposed.set(true)
+            mainDisposable.getAndSet(null)?.dispose()
+            scopeDisposable.getAndSet(null)?.dispose()
+        }
     }
 
 }

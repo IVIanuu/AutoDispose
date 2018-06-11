@@ -18,10 +18,14 @@ package com.ivianuu.autodispose.arch
 
 import android.arch.lifecycle.Lifecycle.Event
 import android.arch.lifecycle.LifecycleOwner
+import com.ivianuu.autodispose.ScopeProviders
+import com.ivianuu.autodispose.autoDispose
 import com.ivianuu.autodispose.lifecycle.autoDispose
 import io.reactivex.disposables.Disposable
 
-fun LifecycleOwner.scope() = AndroidLifecycleScopeProvider.from(this)
+fun ScopeProviders.from(owner: LifecycleOwner) = AndroidLifecycleScopeProvider.from(owner)
+
+fun LifecycleOwner.scope() = ScopeProviders.from(this)
 
 fun Disposable.autoDispose(owner: LifecycleOwner) = autoDispose(owner.scope())
 
