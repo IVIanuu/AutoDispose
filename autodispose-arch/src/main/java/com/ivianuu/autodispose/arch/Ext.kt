@@ -16,46 +16,9 @@
 
 package com.ivianuu.autodispose.arch
 
-import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import com.ivianuu.autodispose.ScopeProviders
-import com.ivianuu.autodispose.autoDisposable
-import com.ivianuu.autodispose.lifecycle.autoDisposable
-import io.reactivex.*
-import io.reactivex.parallel.ParallelFlowable
 
 fun ScopeProviders.from(owner: LifecycleOwner) = AndroidLifecycleScopeProvider.from(owner)
 
 fun LifecycleOwner.scope() = ScopeProviders.from(this)
-
-fun Completable.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
-
-fun <T : Any> Flowable<T>.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
-
-fun <T : Any> Maybe<T>.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
-
-fun <T : Any> Observable<T>.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
-
-fun <T : Any> ParallelFlowable<T>.autoDisposable(owner: LifecycleOwner) =
-    autoDisposable(owner.scope())
-
-fun <T : Any> Single<T>.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
-
-fun Completable.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) = autoDisposable(owner.scope(), untilEvent)
-
-fun <T : Any> Flowable<T>.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) =
-    autoDisposable(owner.scope(), untilEvent)
-
-fun <T : Any> Maybe<T>.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) =
-    autoDisposable(owner.scope(), untilEvent)
-
-fun <T : Any> Observable<T>.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) =
-    autoDisposable(owner.scope(), untilEvent)
-
-fun <T : Any> ParallelFlowable<T>.autoDisposable(
-    owner: LifecycleOwner,
-    untilEvent: Lifecycle.Event
-) = autoDisposable(owner.scope(), untilEvent)
-
-fun <T : Any> Single<T>.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) =
-    autoDisposable(owner.scope(), untilEvent)
