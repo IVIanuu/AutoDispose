@@ -20,7 +20,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bluelinelabs.conductor.Controller
-import com.ivianuu.autodispose.conductor.autoDispose
+import com.ivianuu.autodispose.conductor.autoDisposable
 
 /**
  * @author Manuel Wrage (IVIanuu)
@@ -29,8 +29,8 @@ class TestController : Controller() {
 
     init {
         testObservable()
+            .autoDisposable(this)
             .subscribe()
-            .autoDispose(this)
     }
 
     override fun onCreateView(

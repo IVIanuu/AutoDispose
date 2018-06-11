@@ -19,7 +19,9 @@ package com.ivianuu.autodispose.android
 import android.app.Dialog
 import android.view.View
 import com.ivianuu.autodispose.ScopeProviders
-import io.reactivex.disposables.Disposable
+import com.ivianuu.autodispose.autoDisposable
+import io.reactivex.*
+import io.reactivex.parallel.ParallelFlowable
 
 fun ScopeProviders.from(dialog: Dialog) = DialogScopeProvider.from(dialog)
 
@@ -29,6 +31,26 @@ fun Dialog.scope() = ScopeProviders.from(this)
 
 fun View.scope() = ScopeProviders.from(this)
 
-fun Disposable.autoDispose(dialog: Dialog) = autoDispose(dialog.scope())
+fun Completable.autoDisposable(dialog: Dialog) = autoDisposable(dialog.scope())
 
-fun Disposable.autoDispose(view: View) = autoDispose(view.scope())
+fun <T> Flowable<T>.autoDisposable(dialog: Dialog) = autoDisposable(dialog.scope())
+
+fun <T> Maybe<T>.autoDisposable(dialog: Dialog) = autoDisposable(dialog.scope())
+
+fun <T> Observable<T>.autoDisposable(dialog: Dialog) = autoDisposable(dialog.scope())
+
+fun <T> ParallelFlowable<T>.autoDisposable(dialog: Dialog) = autoDisposable(dialog.scope())
+
+fun <T> Single<T>.autoDisposable(dialog: Dialog) = autoDisposable(dialog.scope())
+
+fun Completable.autoDisposable(view: View) = autoDisposable(view.scope())
+
+fun <T> Flowable<T>.autoDisposable(view: View) = autoDisposable(view.scope())
+
+fun <T> Maybe<T>.autoDisposable(view: View) = autoDisposable(view.scope())
+
+fun <T> Observable<T>.autoDisposable(view: View) = autoDisposable(view.scope())
+
+fun <T> ParallelFlowable<T>.autoDisposable(view: View) = autoDisposable(view.scope())
+
+fun <T> Single<T>.autoDisposable(view: View) = autoDisposable(view.scope())

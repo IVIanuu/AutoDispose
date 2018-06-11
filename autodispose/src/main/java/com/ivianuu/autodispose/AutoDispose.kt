@@ -16,20 +16,54 @@
 
 package com.ivianuu.autodispose
 
-import io.reactivex.Maybe
-import io.reactivex.disposables.Disposable
+import io.reactivex.*
+import io.reactivex.parallel.ParallelFlowable
 
 /**
  * Auto dispose
  */
 object AutoDispose {
 
-    fun autoDispose(disposable: Disposable, scope: Maybe<*>): Disposable {
-        return AutoDisposer(disposable, scope)
-    }
+    fun <T> autoDisposable(scope: Maybe<*>): AutoDisposeTransformer<T> =
+        AutoDisposeTransformerImpl(scope)
 
-    fun autoDispose(disposable: Disposable, provider: ScopeProvider): Disposable {
-        return autoDispose(disposable, provider.requestScope())
-    }
+    fun <T> autoDisposable(scopeProvider: ScopeProvider): AutoDisposeTransformer<T> =
+            autoDisposable(scopeProvider.requestScope())
 
 }
+
+fun Completable.autoDisposable(scope: Maybe<*>) =
+        compose(AutoDispose.autoDisposable<Any>(scope))
+
+fun <T> Flowable<T>.autoDisposable(scope: Maybe<*>) =
+        compose(AutoDispose.autoDisposable<T>(scope))
+
+fun <T> Maybe<T>.autoDisposable(scope: Maybe<*>) =
+        compose(AutoDispose.autoDisposable<T>(scope))
+
+fun <T> Observable<T>.autoDisposable(scope: Maybe<*>) =
+        compose(AutoDispose.autoDisposable<T>(scope))
+
+fun <T> ParallelFlowable<T>.autoDisposable(scope: Maybe<*>) =
+        compose(AutoDispose.autoDisposable<T>(scope))
+
+fun <T> Single<T>.autoDisposable(scope: Maybe<*>) =
+        compose(AutoDispose.autoDisposable<T>(scope))
+
+fun Completable.autoDisposable(provider: ScopeProvider) =
+        compose(AutoDispose.autoDisposable<Any>(provider))
+
+fun <T> Flowable<T>.autoDisposable(provider: ScopeProvider) =
+        compose(AutoDispose.autoDisposable<T>(provider))
+
+fun <T> Maybe<T>.autoDisposable(provider: ScopeProvider) =
+        compose(AutoDispose.autoDisposable<T>(provider))
+
+fun <T> Observable<T>.autoDisposable(provider: ScopeProvider) =
+        compose(AutoDispose.autoDisposable<T>(provider))
+
+fun <T> ParallelFlowable<T>.autoDisposable(provider: ScopeProvider) =
+        compose(AutoDispose.autoDisposable<T>(provider))
+
+fun <T> Single<T>.autoDisposable(provider: ScopeProvider) =
+        compose(AutoDispose.autoDisposable<T>(provider))

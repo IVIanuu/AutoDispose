@@ -18,14 +18,41 @@ package com.ivianuu.autodispose.conductor
 
 import com.bluelinelabs.conductor.Controller
 import com.ivianuu.autodispose.ScopeProviders
-import com.ivianuu.autodispose.autoDispose
-import com.ivianuu.autodispose.lifecycle.autoDispose
-import io.reactivex.disposables.Disposable
+import com.ivianuu.autodispose.autoDisposable
+import com.ivianuu.autodispose.lifecycle.autoDisposable
+import io.reactivex.*
+import io.reactivex.parallel.ParallelFlowable
 
 fun ScopeProviders.from(controller: Controller) = ControllerScopeProvider.from(controller)
 
 fun Controller.scope() = ScopeProviders.from(this)
 
-fun Disposable.autoDispose(controller: Controller) = autoDispose(controller.scope())
+fun Completable.autoDisposable(controller: Controller) = autoDisposable(controller.scope())
 
-fun Disposable.autoDispose(controller: Controller, event: ControllerEvent) = autoDispose(controller.scope(), event)
+fun <T> Flowable<T>.autoDisposable(controller: Controller) = autoDisposable(controller.scope())
+
+fun <T> Maybe<T>.autoDisposable(controller: Controller) = autoDisposable(controller.scope())
+
+fun <T> Observable<T>.autoDisposable(controller: Controller) = autoDisposable(controller.scope())
+
+fun <T> ParallelFlowable<T>.autoDisposable(controller: Controller) = autoDisposable(controller.scope())
+
+fun <T> Single<T>.autoDisposable(controller: Controller) = autoDisposable(controller.scope())
+
+fun Completable.autoDisposable(controller: Controller, untilEvent: ControllerEvent) =
+    autoDisposable(controller.scope(), untilEvent)
+
+fun <T> Flowable<T>.autoDisposable(controller: Controller, untilEvent: ControllerEvent) =
+    autoDisposable(controller.scope(), untilEvent)
+
+fun <T> Maybe<T>.autoDisposable(controller: Controller, untilEvent: ControllerEvent) =
+    autoDisposable(controller.scope(), untilEvent)
+
+fun <T> Observable<T>.autoDisposable(controller: Controller, untilEvent: ControllerEvent) =
+    autoDisposable(controller.scope(), untilEvent)
+
+fun <T> ParallelFlowable<T>.autoDisposable(controller: Controller, untilEvent: ControllerEvent) =
+    autoDisposable(controller.scope(), untilEvent)
+
+fun <T> Single<T>.autoDisposable(controller: Controller, untilEvent: ControllerEvent) =
+    autoDisposable(controller.scope(), untilEvent)

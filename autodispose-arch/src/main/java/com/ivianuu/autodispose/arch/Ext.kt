@@ -16,17 +16,38 @@
 
 package com.ivianuu.autodispose.arch
 
-import android.arch.lifecycle.Lifecycle.Event
+import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import com.ivianuu.autodispose.ScopeProviders
-import com.ivianuu.autodispose.autoDispose
-import com.ivianuu.autodispose.lifecycle.autoDispose
-import io.reactivex.disposables.Disposable
+import com.ivianuu.autodispose.autoDisposable
+import com.ivianuu.autodispose.lifecycle.autoDisposable
+import io.reactivex.*
+import io.reactivex.parallel.ParallelFlowable
 
 fun ScopeProviders.from(owner: LifecycleOwner) = AndroidLifecycleScopeProvider.from(owner)
 
 fun LifecycleOwner.scope() = ScopeProviders.from(this)
 
-fun Disposable.autoDispose(owner: LifecycleOwner) = autoDispose(owner.scope())
+fun Completable.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
 
-fun Disposable.autoDispose(owner: LifecycleOwner, untilEvent: Event) = autoDispose(owner.scope(), untilEvent)
+fun <T> Flowable<T>.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
+
+fun <T> Maybe<T>.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
+
+fun <T> Observable<T>.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
+
+fun <T> ParallelFlowable<T>.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
+
+fun <T> Single<T>.autoDisposable(owner: LifecycleOwner) = autoDisposable(owner.scope())
+
+fun Completable.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) = autoDisposable(owner.scope(), untilEvent)
+
+fun <T> Flowable<T>.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) = autoDisposable(owner.scope(), untilEvent)
+
+fun <T> Maybe<T>.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) = autoDisposable(owner.scope(), untilEvent)
+
+fun <T> Observable<T>.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) = autoDisposable(owner.scope(), untilEvent)
+
+fun <T> ParallelFlowable<T>.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) = autoDisposable(owner.scope(), untilEvent)
+
+fun <T> Single<T>.autoDisposable(owner: LifecycleOwner, untilEvent: Lifecycle.Event) = autoDisposable(owner.scope(), untilEvent)
