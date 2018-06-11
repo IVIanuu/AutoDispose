@@ -27,7 +27,7 @@ import org.reactivestreams.Subscription
 /**
  * Subscribe proxy that matches [Flowable]'s subscribe overloads.
  */
-interface FlowableSubscribeProxy<T> {
+interface FlowableSubscribeProxy<T : Any> {
 
     fun subscribe(): Disposable
 
@@ -54,17 +54,17 @@ interface FlowableSubscribeProxy<T> {
     fun test(initialRequest: Long): TestSubscriber<T>
 
     fun test(initialRequest: Long, cancel: Boolean): TestSubscriber<T>
-}
 
-fun <T : Any> FlowableSubscribeProxy<T>.subscribe(onNext: (T) -> Unit): Disposable {
-    return subscribe(Consumer { onNext.invoke(it) })
-}
+    fun subscribe(onNext: (T) -> Unit): Disposable {
+        return subscribe(Consumer { onNext.invoke(it) })
+    }
 
-fun <T : Any> FlowableSubscribeProxy<T>.subscribeBy(
-    onError: (Throwable) -> Unit = onErrorStub,
-    onComplete: () -> Unit = onCompleteStub,
-    onNext: (T) -> Unit = onNextStub
-): Disposable {
-    return subscribe(Consumer { onNext.invoke(it) },
-        Consumer { onError.invoke(it) }, Action { onComplete.invoke() })
+    fun subscribeBy(
+        onError: (Throwable) -> Unit = onErrorStub,
+        onComplete: () -> Unit = onCompleteStub,
+        onNext: (T) -> Unit = onNextStub
+    ): Disposable {
+        return subscribe(Consumer { onNext.invoke(it) },
+            Consumer { onError.invoke(it) }, Action { onComplete.invoke() })
+    }
 }

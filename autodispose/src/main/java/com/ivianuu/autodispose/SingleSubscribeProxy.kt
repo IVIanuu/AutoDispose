@@ -26,7 +26,7 @@ import io.reactivex.observers.TestObserver
 /**
  * Subscribe proxy that matches [Single]'s subscribe overloads.
  */
-interface SingleSubscribeProxy<T> {
+interface SingleSubscribeProxy<T : Any> {
 
     fun subscribe(): Disposable
 
@@ -43,15 +43,15 @@ interface SingleSubscribeProxy<T> {
     fun test(): TestObserver<T>
 
     fun test(cancel: Boolean): TestObserver<T>
-}
 
-fun <T : Any> SingleSubscribeProxy<T>.subscribe(onSuccess: (T) -> Unit): Disposable {
-    return subscribe(Consumer { onSuccess.invoke(it) })
-}
+    fun subscribe(onSuccess: (T) -> Unit): Disposable {
+        return subscribe(Consumer { onSuccess.invoke(it) })
+    }
 
-fun <T : Any> SingleSubscribeProxy<T>.subscribeBy(
-    onError: (Throwable) -> Unit = onErrorStub,
-    onSuccess: (T) -> Unit = onNextStub
-): Disposable {
-    return subscribe(Consumer { onSuccess.invoke(it) }, Consumer { onError.invoke(it) })
+    fun subscribeBy(
+        onError: (Throwable) -> Unit = onErrorStub,
+        onSuccess: (T) -> Unit = onNextStub
+    ): Disposable {
+        return subscribe(Consumer { onSuccess.invoke(it) }, Consumer { onError.invoke(it) })
+    }
 }

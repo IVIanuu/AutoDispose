@@ -40,15 +40,15 @@ interface CompletableSubscribeProxy {
     fun test(): TestObserver<Void>
 
     fun test(cancelled: Boolean): TestObserver<Void>
-}
 
-fun CompletableSubscribeProxy.subscribe(onComplete: () -> Unit): Disposable {
-    return subscribe(Action { onComplete.invoke() })
-}
+    fun subscribe(onComplete: () -> Unit): Disposable {
+        return subscribe(Action { onComplete.invoke() })
+    }
 
-fun CompletableSubscribeProxy.subscribeBy(
-    onComplete: () -> Unit = onCompleteStub,
-    onError: (Throwable) -> Unit = onErrorStub
-): Disposable {
-    return subscribe(Action { onComplete.invoke() }, Consumer { onError.invoke(it) })
+    fun subscribeBy(
+        onComplete: () -> Unit = onCompleteStub,
+        onError: (Throwable) -> Unit = onErrorStub
+    ): Disposable {
+        return subscribe(Action { onComplete.invoke() }, Consumer { onError.invoke(it) })
+    }
 }

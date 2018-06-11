@@ -26,7 +26,7 @@ import io.reactivex.observers.TestObserver
 /**
  * Subscribe proxy that matches [Maybe]'s subscribe overloads.
  */
-interface MaybeSubscribeProxy<T> {
+interface MaybeSubscribeProxy<T : Any> {
 
     fun subscribe(): Disposable
 
@@ -46,17 +46,17 @@ interface MaybeSubscribeProxy<T> {
     fun test(): TestObserver<T>
 
     fun test(cancel: Boolean): TestObserver<T>
-}
 
-fun <T : Any> MaybeSubscribeProxy<T>.subscribe(onSuccess: (T) -> Unit): Disposable {
-    return subscribe({ onSuccess.invoke(it) })
-}
+    fun subscribe(onSuccess: (T) -> Unit): Disposable {
+        return subscribe({ onSuccess.invoke(it) })
+    }
 
-fun <T : Any> MaybeSubscribeProxy<T>.subscribeBy(
-    onError: (Throwable) -> Unit = onErrorStub,
-    onComplete: () -> Unit = onCompleteStub,
-    onSuccess: (T) -> Unit = onNextStub
-): Disposable {
-    return subscribe(Consumer { onSuccess.invoke(it) },
-        Consumer { onError.invoke(it) }, Action { onComplete.invoke() })
+    fun subscribeBy(
+        onError: (Throwable) -> Unit = onErrorStub,
+        onComplete: () -> Unit = onCompleteStub,
+        onSuccess: (T) -> Unit = onNextStub
+    ): Disposable {
+        return subscribe(Consumer { onSuccess.invoke(it) },
+            Consumer { onError.invoke(it) }, Action { onComplete.invoke() })
+    }
 }
