@@ -18,27 +18,13 @@ package com.ivianuu.autodispose.android
 
 import android.app.Dialog
 import android.view.View
-import com.ivianuu.autodispose.ScopeProvider
-import com.ivianuu.autodispose.ScopeProviders
 import com.ivianuu.autodispose.autoDispose
 import io.reactivex.disposables.Disposable
 
-fun ScopeProviders.from(dialog: Dialog): ScopeProvider {
-    return DialogScopeProvider.from(dialog)
-}
+fun Dialog.scope() = DialogScopeProvider.from(this)
 
-fun ScopeProviders.from(view: View): ScopeProvider {
-    return ViewScopeProvider.from(view)
-}
+fun View.scope() = ViewScopeProvider.from(this)
 
-fun Dialog.scope() = ScopeProviders.from(this)
+fun Disposable.autoDispose(dialog: Dialog) = autoDispose(dialog.scope())
 
-fun View.scope() = ScopeProviders.from(this)
-
-fun Disposable.autoDispose(dialog: Dialog) {
-    autoDispose(ScopeProviders.from(dialog))
-}
-
-fun Disposable.autoDispose(view: View) {
-    autoDispose(ScopeProviders.from(view))
-}
+fun Disposable.autoDispose(view: View) = autoDispose(view.scope())

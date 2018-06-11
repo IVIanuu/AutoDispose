@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.ivianuu.autodispose
+package com.ivianuu.autodispose.lifecycle
 
+import com.ivianuu.autodispose.OutsideLifecycleException
 import io.reactivex.Maybe
 import io.reactivex.Observable
 

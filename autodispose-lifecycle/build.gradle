@@ -25,14 +25,13 @@ android {
     compileSdkVersion Versions.compileSdk
 
     defaultConfig {
-        minSdkVersion Versions.minSdkConductor
+        minSdkVersion Versions.minSdk
         targetSdkVersion Versions.targetSdk
     }
 }
 
 dependencies {
-    api Deps.conductor
-    api project(':autodispose-lifecycle')
+    api project(':autodispose')
 }
 
 // build a jar with source files

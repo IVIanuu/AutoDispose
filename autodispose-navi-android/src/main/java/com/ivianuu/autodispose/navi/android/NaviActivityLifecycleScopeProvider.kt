@@ -17,7 +17,7 @@
 package com.ivianuu.autodispose.navi.android
 
 import android.app.Activity
-import com.ivianuu.autodispose.LifecycleScopeProvider
+import com.ivianuu.autodispose.lifecycle.LifecycleScopeProvider
 import com.ivianuu.autodispose.navi.android.ActivityEvent.*
 import com.ivianuu.navi.Listener
 import com.ivianuu.navi.NaviComponent

@@ -17,21 +17,11 @@
 package com.ivianuu.autodispose.conductor
 
 import com.bluelinelabs.conductor.Controller
-import com.ivianuu.autodispose.LifecycleScopeProvider
-import com.ivianuu.autodispose.ScopeProviders
-import com.ivianuu.autodispose.autoDispose
+import com.ivianuu.autodispose.lifecycle.autoDispose
 import io.reactivex.disposables.Disposable
 
-fun ScopeProviders.from(controller: Controller): LifecycleScopeProvider<ControllerEvent> {
-    return ControllerScopeProvider.from(controller)
-}
+fun Controller.scope() = ControllerScopeProvider.from(this)
 
-fun Controller.scope() = ScopeProviders.from(this)
+fun Disposable.autoDispose(controller: Controller) = autoDispose(controller.scope())
 
-fun Disposable.autoDispose(controller: Controller) {
-    autoDispose(ScopeProviders.from(controller))
-}
-
-fun Disposable.autoDispose(controller: Controller, event: ControllerEvent) {
-    autoDispose(ScopeProviders.from(controller), event)
-}
+fun Disposable.autoDispose(controller: Controller, event: ControllerEvent) = autoDispose(controller.scope(), event)

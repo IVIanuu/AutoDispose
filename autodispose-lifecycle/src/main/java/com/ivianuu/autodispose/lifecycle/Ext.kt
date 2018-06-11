@@ -14,15 +14,23 @@
  * limitations under the License.
  */
 
-package com.ivianuu.autodispose.arch
+package com.ivianuu.autodispose.lifecycle
 
-import android.arch.lifecycle.Lifecycle.Event
-import android.arch.lifecycle.LifecycleOwner
-import com.ivianuu.autodispose.lifecycle.autoDispose
+import com.ivianuu.autodispose.autoDispose
+import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 
-fun LifecycleOwner.scope() = AndroidLifecycleScopeProvider.from(this)
+fun <T> Disposable.autoDispose(lifecycleScopeProvider: LifecycleScopeProvider<T>) {
+    autoDispose(lifecycleScopeProvider)
+}
 
-fun Disposable.autoDispose(owner: LifecycleOwner) = autoDispose(owner.scope())
+fun <T> Disposable.autoDispose(
+    lifecycleScopeProvider: LifecycleScopeProvider<T>,
+    untilEvent: T
+) {
+    autoDispose(lifecycleScopeProvider, untilEvent)
+}
 
-fun Disposable.autoDispose(owner: LifecycleOwner, untilEvent: Event) = autoDispose(owner.scope(), untilEvent)
+fun <T> Disposable.autoDispose(lifecycle: Observable<T>, untilEvent: T) {
+    autoDispose(LifecycleScopeUtil.getScope(lifecycle, untilEvent))
+}

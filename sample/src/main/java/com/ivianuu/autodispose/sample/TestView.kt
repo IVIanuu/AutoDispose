@@ -19,11 +19,7 @@ package com.ivianuu.autodispose.sample
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import com.ivianuu.autodispose.ScopeProviders
 import com.ivianuu.autodispose.android.autoDispose
-import com.ivianuu.autodispose.android.from
-import com.ivianuu.autodispose.android.scope
-import com.ivianuu.autodispose.autoDispose
 
 /**
  * @author Manuel Wrage (IVIanuu)
@@ -35,14 +31,6 @@ class TestView @JvmOverloads constructor(
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-
-        testObservable()
-            .subscribe()
-            .autoDispose(ScopeProviders.from(this))
-
-        testObservable()
-            .subscribe()
-            .autoDispose(scope())
 
         testObservable()
             .subscribe()

@@ -33,8 +33,7 @@ android {
 dependencies {
     api Deps.supportAppCompat
     kapt Deps.archLifecycleCompiler
-
-    api project(':autodispose')
+    api project(':autodispose-lifecycle')
 }
 
 // build a jar with source files

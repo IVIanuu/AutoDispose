@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.ivianuu.autodispose
+package com.ivianuu.autodispose.lifecycle
 
+import com.ivianuu.autodispose.ScopeProvider
 import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.functions.Function

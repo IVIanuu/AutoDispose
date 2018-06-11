@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/autodispose-android/autodispose-android.iml" filepath="$PROJECT_DIR$/autodispose-android/autodispose-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/autodispose-arch/autodispose-arch.iml" filepath="$PROJECT_DIR$/autodispose-arch/autodispose-arch.iml" />
       <module fileurl="file://$PROJECT_DIR$/autodispose-conductor/autodispose-conductor.iml" filepath="$PROJECT_DIR$/autodispose-conductor/autodispose-conductor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/autodispose-lifecycle/autodispose-lifecycle.iml" filepath="$PROJECT_DIR$/autodispose-lifecycle/autodispose-lifecycle.iml" />
       <module fileurl="file://$PROJECT_DIR$/autodispose-navi-android/autodispose-navi-android.iml" filepath="$PROJECT_DIR$/autodispose-navi-android/autodispose-navi-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/autodispose-view/autodispose-view.iml" filepath="$PROJECT_DIR$/autodispose-view/autodispose-view.iml" />
       <module fileurl="file://$PROJECT_DIR$/buildSrc/buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/buildSrc.iml" />

@@ -23,8 +23,8 @@ import android.arch.lifecycle.Lifecycle.State.*
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.OnLifecycleEvent
-import com.ivianuu.autodispose.LifecycleScopeProvider
 import com.ivianuu.autodispose.OutsideLifecycleException
+import com.ivianuu.autodispose.lifecycle.LifecycleScopeProvider
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable

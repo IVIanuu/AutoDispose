@@ -31,7 +31,6 @@ android {
 
 dependencies {
     api Deps.kotlinStdLib
-
     api Deps.rxJava
 }
 
