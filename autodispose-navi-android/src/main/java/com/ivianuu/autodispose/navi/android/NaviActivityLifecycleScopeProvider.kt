@@ -82,7 +82,7 @@ class NaviActivityLifecycleScopeProvider private constructor(
         }
 
 
-        fun <T : Any> from(activity: T): LifecycleScopeProvider<ActivityEvent> where T : Activity, T : NaviComponent {
+        fun <N> from(activity: N): LifecycleScopeProvider<ActivityEvent> where N : Activity, N : NaviComponent {
             return NaviActivityLifecycleScopeProvider(activity)
         }
     }

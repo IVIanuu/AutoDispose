@@ -89,7 +89,7 @@ class NaviFragmentLifecycleScopeProvider private constructor(
             }
         }
 
-        fun <T : Any> from(fragment: T): LifecycleScopeProvider<FragmentEvent> where T : Fragment, T : NaviComponent {
+        fun <N> from(fragment: N): LifecycleScopeProvider<FragmentEvent> where N : Fragment, N : NaviComponent {
             return NaviFragmentLifecycleScopeProvider(fragment)
         }
 

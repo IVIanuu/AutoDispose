@@ -38,71 +38,101 @@ fun <N> N.scope()where N : Fragment, N : NaviComponent = ScopeProviders.from(thi
 fun <N> Completable.autoDisposable(naviActivity: N) where N : Activity, N : NaviComponent =
         autoDisposable(naviActivity.scope())
 
-fun <N, T> Flowable<T>.autoDisposable(naviActivity: N) where N : Activity, N : NaviComponent =
+fun <N, T : Any> Flowable<T>.autoDisposable(naviActivity: N) where N : Activity, N : NaviComponent =
     autoDisposable(naviActivity.scope())
 
-fun <N, T> Maybe<T>.autoDisposable(naviActivity: N) where N : Activity, N : NaviComponent =
+fun <N, T : Any> Maybe<T>.autoDisposable(naviActivity: N) where N : Activity, N : NaviComponent =
     autoDisposable(naviActivity.scope())
 
-fun <N, T> Observable<T>.autoDisposable(naviActivity: N) where N : Activity, N : NaviComponent =
+fun <N, T : Any> Observable<T>.autoDisposable(naviActivity: N) where N : Activity, N : NaviComponent =
     autoDisposable(naviActivity.scope())
 
-fun <N, T> ParallelFlowable<T>.autoDisposable(naviActivity: N) where N : Activity, N : NaviComponent =
+fun <N, T : Any> ParallelFlowable<T>.autoDisposable(naviActivity: N) where N : Activity, N : NaviComponent =
     autoDisposable(naviActivity.scope())
 
-fun <N, T> Single<T>.autoDisposable(naviActivity: N) where N : Activity, N : NaviComponent =
+fun <N, T : Any> Single<T>.autoDisposable(naviActivity: N) where N : Activity, N : NaviComponent =
     autoDisposable(naviActivity.scope())
 
 fun <N> Completable.autoDisposable(naviFragment: N) where N : Fragment, N : NaviComponent =
     autoDisposable(naviFragment.scope())
 
-fun <N, T> Flowable<T>.autoDisposable(naviFragment: N) where N : Fragment, N : NaviComponent =
+fun <N, T : Any> Flowable<T>.autoDisposable(naviFragment: N) where N : Fragment, N : NaviComponent =
     autoDisposable(naviFragment.scope())
 
-fun <N, T> Maybe<T>.autoDisposable(naviFragment: N) where N : Fragment, N : NaviComponent =
+fun <N, T : Any> Maybe<T>.autoDisposable(naviFragment: N) where N : Fragment, N : NaviComponent =
     autoDisposable(naviFragment.scope())
 
-fun <N, T> Observable<T>.autoDisposable(naviFragment: N) where N : Fragment, N : NaviComponent =
+fun <N, T : Any> Observable<T>.autoDisposable(naviFragment: N) where N : Fragment, N : NaviComponent =
     autoDisposable(naviFragment.scope())
 
-fun <N, T> ParallelFlowable<T>.autoDisposable(naviFragment: N) where N : Fragment, N : NaviComponent =
+fun <N, T : Any> ParallelFlowable<T>.autoDisposable(naviFragment: N) where N : Fragment, N : NaviComponent =
     autoDisposable(naviFragment.scope())
 
-fun <N, T> Single<T>.autoDisposable(naviFragment: N) where N : Fragment, N : NaviComponent =
+fun <N, T : Any> Single<T>.autoDisposable(naviFragment: N) where N : Fragment, N : NaviComponent =
     autoDisposable(naviFragment.scope())
 
 fun <N> Completable.autoDisposable(naviActivity: N, untilEvent: ActivityEvent) where N : Activity, N : NaviComponent =
     autoDisposable(naviActivity.scope(), untilEvent)
 
-fun <N, T> Flowable<T>.autoDisposable(naviActivity: N, untilEvent: ActivityEvent) where N : Activity, N : NaviComponent =
+fun <N, T : Any> Flowable<T>.autoDisposable(
+    naviActivity: N,
+    untilEvent: ActivityEvent
+) where N : Activity, N : NaviComponent =
     autoDisposable(naviActivity.scope(), untilEvent)
 
-fun <N, T> Maybe<T>.autoDisposable(naviActivity: N, untilEvent: ActivityEvent) where N : Activity, N : NaviComponent =
+fun <N, T : Any> Maybe<T>.autoDisposable(
+    naviActivity: N,
+    untilEvent: ActivityEvent
+) where N : Activity, N : NaviComponent =
     autoDisposable(naviActivity.scope(), untilEvent)
 
-fun <N, T> Observable<T>.autoDisposable(naviActivity: N, untilEvent: ActivityEvent) where N : Activity, N : NaviComponent =
+fun <N, T : Any> Observable<T>.autoDisposable(
+    naviActivity: N,
+    untilEvent: ActivityEvent
+) where N : Activity, N : NaviComponent =
     autoDisposable(naviActivity.scope(), untilEvent)
 
-fun <N, T> ParallelFlowable<T>.autoDisposable(naviActivity: N, untilEvent: ActivityEvent) where N : Activity, N : NaviComponent =
+fun <N, T : Any> ParallelFlowable<T>.autoDisposable(
+    naviActivity: N,
+    untilEvent: ActivityEvent
+) where N : Activity, N : NaviComponent =
     autoDisposable(naviActivity.scope(), untilEvent)
 
-fun <N, T> Single<T>.autoDisposable(naviActivity: N, untilEvent: ActivityEvent) where N : Activity, N : NaviComponent =
+fun <N, T : Any> Single<T>.autoDisposable(
+    naviActivity: N,
+    untilEvent: ActivityEvent
+) where N : Activity, N : NaviComponent =
     autoDisposable(naviActivity.scope(), untilEvent)
 
 fun <N> Completable.autoDisposable(naviFragment: N, untilEvent: FragmentEvent) where N : Fragment, N : NaviComponent =
     autoDisposable(naviFragment.scope(), untilEvent)
 
-fun <N, T> Flowable<T>.autoDisposable(naviFragment: N, untilEvent: FragmentEvent) where N : Fragment, N : NaviComponent =
+fun <N, T : Any> Flowable<T>.autoDisposable(
+    naviFragment: N,
+    untilEvent: FragmentEvent
+) where N : Fragment, N : NaviComponent =
     autoDisposable(naviFragment.scope(), untilEvent)
 
-fun <N, T> Maybe<T>.autoDisposable(naviFragment: N, untilEvent: FragmentEvent) where N : Fragment, N : NaviComponent =
+fun <N, T : Any> Maybe<T>.autoDisposable(
+    naviFragment: N,
+    untilEvent: FragmentEvent
+) where N : Fragment, N : NaviComponent =
     autoDisposable(naviFragment.scope(), untilEvent)
 
-fun <N, T> Observable<T>.autoDisposable(naviFragment: N, untilEvent: FragmentEvent) where N : Fragment, N : NaviComponent =
+fun <N, T : Any> Observable<T>.autoDisposable(
+    naviFragment: N,
+    untilEvent: FragmentEvent
+) where N : Fragment, N : NaviComponent =
     autoDisposable(naviFragment.scope(), untilEvent)
 
-fun <N, T> ParallelFlowable<T>.autoDisposable(naviFragment: N, untilEvent: FragmentEvent) where N : Fragment, N : NaviComponent =
+fun <N, T : Any> ParallelFlowable<T>.autoDisposable(
+    naviFragment: N,
+    untilEvent: FragmentEvent
+) where N : Fragment, N : NaviComponent =
     autoDisposable(naviFragment.scope(), untilEvent)
 
-fun <N, T> Single<T>.autoDisposable(naviFragment: N, untilEvent: FragmentEvent) where N : Fragment, N : NaviComponent =
+fun <N, T : Any> Single<T>.autoDisposable(
+    naviFragment: N,
+    untilEvent: FragmentEvent
+) where N : Fragment, N : NaviComponent =
     autoDisposable(naviFragment.scope(), untilEvent)
