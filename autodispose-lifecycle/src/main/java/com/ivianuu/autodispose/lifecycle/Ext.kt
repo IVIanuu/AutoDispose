@@ -31,37 +31,37 @@ fun <T, E> AutoDispose.autoDisposable(
 ) = autoDisposable<T>(LifecycleScopeUtil.getScope(lifecycle, untilEvent))
 
 fun <E> Completable.autoDisposable(provider: LifecycleScopeProvider<E>, untilEvent: E) =
-    compose(AutoDispose.autoDisposable<Any, E>(provider, untilEvent))
+    `as`(AutoDispose.autoDisposable<Any, E>(provider, untilEvent))
 
 fun <T, E> Flowable<T>.autoDisposable(provider: LifecycleScopeProvider<E>, untilEvent: E) =
-    compose(AutoDispose.autoDisposable<T, E>(provider, untilEvent))
+    `as`(AutoDispose.autoDisposable<T, E>(provider, untilEvent))
 
 fun <T, E> Maybe<T>.autoDisposable(provider: LifecycleScopeProvider<E>, untilEvent: E) =
-    compose(AutoDispose.autoDisposable<T, E>(provider, untilEvent))
+    `as`(AutoDispose.autoDisposable<T, E>(provider, untilEvent))
 
 fun <T, E> Observable<T>.autoDisposable(provider: LifecycleScopeProvider<E>, untilEvent: E) =
-    compose(AutoDispose.autoDisposable<T, E>(provider, untilEvent))
+    `as`(AutoDispose.autoDisposable<T, E>(provider, untilEvent))
 
 fun <T, E> ParallelFlowable<T>.autoDisposable(provider: LifecycleScopeProvider<E>, untilEvent: E) =
-    compose(AutoDispose.autoDisposable<T, E>(provider, untilEvent))
+    `as`(AutoDispose.autoDisposable<T, E>(provider, untilEvent))
 
 fun <T, E> Single<T>.autoDisposable(provider: LifecycleScopeProvider<E>, untilEvent: E) =
-    compose(AutoDispose.autoDisposable<T, E>(provider, untilEvent))
+    `as`(AutoDispose.autoDisposable<T, E>(provider, untilEvent))
 
 fun <E> Completable.autoDisposable(lifecycle: Observable<E>, untilEvent: E) =
-    compose(AutoDispose.autoDisposable<Any, E>(lifecycle, untilEvent))
+    `as`(AutoDispose.autoDisposable<Any, E>(lifecycle, untilEvent))
 
 fun <T, E> Flowable<T>.autoDisposable(lifecycle: Observable<E>, untilEvent: E) =
-    compose(AutoDispose.autoDisposable<T, E>(lifecycle, untilEvent))
+    `as`(AutoDispose.autoDisposable<T, E>(lifecycle, untilEvent))
 
 fun <T, E> Maybe<T>.autoDisposable(lifecycle: Observable<E>, untilEvent: E) =
-    compose(AutoDispose.autoDisposable<T, E>(lifecycle, untilEvent))
+    `as`(AutoDispose.autoDisposable<T, E>(lifecycle, untilEvent))
 
 fun <T, E> Observable<T>.autoDisposable(lifecycle: Observable<E>, untilEvent: E) =
-    compose(AutoDispose.autoDisposable<T, E>(lifecycle, untilEvent))
+    `as`(AutoDispose.autoDisposable<T, E>(lifecycle, untilEvent))
 
 fun <T, E> ParallelFlowable<T>.autoDisposable(lifecycle: Observable<E>, untilEvent: E) =
-    compose(AutoDispose.autoDisposable<T, E>(lifecycle, untilEvent))
+    `as`(AutoDispose.autoDisposable<T, E>(lifecycle, untilEvent))
 
 fun <T, E> Single<T>.autoDisposable(lifecycle: Observable<E>, untilEvent: E) =
-    compose(AutoDispose.autoDisposable<T, E>(lifecycle, untilEvent))
+    `as`(AutoDispose.autoDisposable<T, E>(lifecycle, untilEvent))
