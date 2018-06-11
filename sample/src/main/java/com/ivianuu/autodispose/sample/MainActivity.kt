@@ -21,7 +21,7 @@ import android.support.v7.app.AppCompatActivity
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
-import com.ivianuu.autodispose.arch.autoDispose
+import com.ivianuu.autodispose.arch.autoDisposable
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         testObservable()
             .subscribe()
-            .autoDispose(this)
+            .autoDisposable(this)
     }
 
     override fun onBackPressed() {

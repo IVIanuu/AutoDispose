@@ -16,7 +16,7 @@
 
 package com.ivianuu.autodispose.lifecycle
 
-import com.ivianuu.autodispose.OutsideLifecycleException
+import com.ivianuu.autodispose.LifecycleNotStartedException
 import io.reactivex.Maybe
 import io.reactivex.Observable
 
@@ -27,7 +27,7 @@ internal object LifecycleScopeUtil {
 
     fun <T> getScope(lifecycleScopeProvider: LifecycleScopeProvider<T>): Maybe<T> {
         val currentEvent = lifecycleScopeProvider.peekLifecycle()
-                ?: throw OutsideLifecycleException("lifecycle has not started yet")
+                ?: throw LifecycleNotStartedException()
 
         val untilEvent = lifecycleScopeProvider.correspondingEvents().apply(currentEvent)
 

@@ -18,7 +18,7 @@ package com.ivianuu.autodispose.android
 
 import android.app.Dialog
 import android.view.View
-import com.ivianuu.autodispose.OutsideLifecycleException
+import com.ivianuu.autodispose.LifecycleNotStartedException
 import com.ivianuu.autodispose.ScopeProvider
 import io.reactivex.Maybe
 
@@ -31,7 +31,7 @@ class DialogScopeProvider private constructor(private val dialog: Dialog) : Scop
         val isAttached = AutoDisposeAndroidUtil.isAttached(dialog.window.decorView)
 
         if (!isAttached) {
-            throw OutsideLifecycleException("view not attached")
+            throw LifecycleNotStartedException()
         }
 
         return Maybe.create<Unit> { e ->

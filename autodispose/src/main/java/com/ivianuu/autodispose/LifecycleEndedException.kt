@@ -16,20 +16,7 @@
 
 package com.ivianuu.autodispose
 
-import io.reactivex.Maybe
-import io.reactivex.disposables.Disposable
-
 /**
- * Auto dispose
+ * Signifies an error occurred due to execution starting after the lifecycle has ended.
  */
-object AutoDispose {
-
-    fun autoDisposable(disposable: Disposable, scope: Maybe<*>): Disposable {
-        return AutoDisposer(disposable, scope)
-    }
-
-    fun autoDisposable(disposable: Disposable, provider: ScopeProvider): Disposable {
-        return autoDisposable(disposable, provider.requestScope())
-    }
-
-}
+class LifecycleEndedException (s: String = "Lifecycle has ended!") : OutsideLifecycleException(s)

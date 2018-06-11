@@ -17,6 +17,7 @@
 package com.ivianuu.autodispose.navi.android
 
 import android.app.Activity
+import com.ivianuu.autodispose.OutsideLifecycleException
 import com.ivianuu.autodispose.lifecycle.LifecycleScopeProvider
 import com.ivianuu.autodispose.navi.android.ActivityEvent.*
 import com.ivianuu.navi.Listener
@@ -76,7 +77,7 @@ class NaviActivityLifecycleScopeProvider private constructor(
                 RESUME -> PAUSE
                 PAUSE -> STOP
                 STOP -> DESTROY
-                else -> throw IllegalStateException("out of lifecycle ${it::class.java.simpleName}")
+                else -> throw OutsideLifecycleException("out of lifecycle ${it::class.java.simpleName}")
             }
         }
 
