@@ -19,7 +19,7 @@ package com.ivianuu.autodispose.sample
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import com.ivianuu.autodispose.android.autoDisposable
+import com.ivianuu.autodispose.android.autoDispose
 
 /**
  * @author Manuel Wrage (IVIanuu)
@@ -34,7 +34,7 @@ class TestView @JvmOverloads constructor(
 
         testObservable()
             .subscribe()
-            .autoDisposable(this)
+            .autoDispose(this)
     }
 
 }

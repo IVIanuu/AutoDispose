@@ -32,10 +32,10 @@ fun <T> AutoDispose.autoDispose(
     untilEvent: T
 ) = autoDispose(disposable, LifecycleScopeUtil.getScope(lifecycle, untilEvent))
 
-fun <T> Disposable.autoDisposable(
+fun <T> Disposable.autoDispose(
     provider: LifecycleScopeProvider<T>,
     untilEvent: T
 ) = AutoDispose.autoDispose(this, provider, untilEvent)
 
-fun <T> Disposable.autoDisposable(lifecycle: Observable<T>, untilEvent: T) =
+fun <T> Disposable.autoDispose(lifecycle: Observable<T>, untilEvent: T) =
         AutoDispose.autoDispose(this, lifecycle, untilEvent)

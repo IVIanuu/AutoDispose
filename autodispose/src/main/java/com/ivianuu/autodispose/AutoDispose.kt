@@ -24,12 +24,12 @@ import io.reactivex.disposables.Disposable
  */
 object AutoDispose {
 
-    fun autoDisposable(disposable: Disposable, scope: Maybe<*>): Disposable {
+    fun autoDispose(disposable: Disposable, scope: Maybe<*>): Disposable {
         return AutoDisposer(disposable, scope)
     }
 
-    fun autoDisposable(disposable: Disposable, provider: ScopeProvider): Disposable {
-        return autoDisposable(disposable, provider.requestScope())
+    fun autoDispose(disposable: Disposable, provider: ScopeProvider): Disposable {
+        return autoDispose(disposable, provider.requestScope())
     }
 
 }

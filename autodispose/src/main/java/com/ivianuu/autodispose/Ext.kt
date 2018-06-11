@@ -19,8 +19,8 @@ package com.ivianuu.autodispose
 import io.reactivex.Maybe
 import io.reactivex.disposables.Disposable
 
-fun Disposable.autoDisposable(scope: Maybe<*>) =
-    AutoDispose.autoDisposable(this, scope)
+fun Disposable.autoDispose(scope: Maybe<*>) =
+    AutoDispose.autoDispose(this, scope)
 
-fun Disposable.autoDisposable(provider: ScopeProvider) =
-    AutoDispose.autoDisposable(this, provider)
+fun Disposable.autoDispose(provider: ScopeProvider) =
+    AutoDispose.autoDispose(this, provider)

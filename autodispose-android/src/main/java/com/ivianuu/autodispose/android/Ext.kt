@@ -29,6 +29,6 @@ fun Dialog.scope() = ScopeProviders.from(this)
 
 fun View.scope() = ScopeProviders.from(this)
 
-fun Disposable.autoDisposable(dialog: Dialog) = autoDispose(dialog.scope())
+fun Disposable.autoDispose(dialog: Dialog) = autoDispose(dialog.scope())
 
-fun Disposable.autoDisposable(view: View) = autoDispose(view.scope())
+fun Disposable.autoDispose(view: View) = autoDispose(view.scope())
