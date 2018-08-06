@@ -32,7 +32,7 @@ android {
 
 dependencies {
     api Deps.naviAndroid
-    api project(':autodispose-lifecycle')
+    api project(':autodispose')
 }
 
 // build a jar with source files

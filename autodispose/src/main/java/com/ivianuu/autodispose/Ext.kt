@@ -17,6 +17,7 @@
 package com.ivianuu.autodispose
 
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 
 fun Disposable.autoDispose(scope: Completable) =
@@ -24,3 +25,23 @@ fun Disposable.autoDispose(scope: Completable) =
 
 fun Disposable.autoDispose(provider: ScopeProvider) =
     AutoDispose.autoDispose(this, provider)
+
+fun <T> AutoDispose.autoDispose(
+    disposable: Disposable,
+    provider: LifecycleScopeProvider<T>,
+    untilEvent: T
+) = autoDispose(disposable, provider.requestScope(untilEvent))
+
+fun <T> AutoDispose.autoDispose(
+    disposable: Disposable,
+    lifecycle: Observable<T>,
+    untilEvent: T
+) = autoDispose(disposable, LifecycleScopeUtil.getScope(lifecycle, untilEvent))
+
+fun <T> Disposable.autoDispose(
+    provider: LifecycleScopeProvider<T>,
+    untilEvent: T
+) = AutoDispose.autoDispose(this, provider, untilEvent)
+
+fun <T> Disposable.autoDispose(lifecycle: Observable<T>, untilEvent: T) =
+    AutoDispose.autoDispose(this, lifecycle, untilEvent)

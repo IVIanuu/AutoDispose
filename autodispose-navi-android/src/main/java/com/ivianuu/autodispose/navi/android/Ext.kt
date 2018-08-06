@@ -20,7 +20,6 @@ import android.app.Activity
 import android.support.v4.app.Fragment
 import com.ivianuu.autodispose.ScopeProviders
 import com.ivianuu.autodispose.autoDispose
-import com.ivianuu.autodispose.lifecycle.autoDispose
 import com.ivianuu.navi.NaviComponent
 import io.reactivex.disposables.Disposable
 

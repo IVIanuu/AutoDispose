@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-package com.ivianuu.autodispose.lifecycle
+package com.ivianuu.autodispose
 
-import com.ivianuu.autodispose.AutoDisposePlugins
-import com.ivianuu.autodispose.LifecycleNotStartedException
 import io.reactivex.Completable
 import io.reactivex.Observable
 
@@ -41,14 +39,20 @@ internal object LifecycleScopeUtil {
         val untilEvent = lifecycleScopeProvider.correspondingEvents()
             .apply(currentEvent)
 
-        return getScope(lifecycleScopeProvider, untilEvent)
+        return getScope(
+            lifecycleScopeProvider,
+            untilEvent
+        )
     }
 
     fun <T> getScope(
         lifecycleScopeProvider: LifecycleScopeProvider<T>,
         untilEvent: T
     ): Completable =
-        getScope(lifecycleScopeProvider.lifecycle(), untilEvent)
+        getScope(
+            lifecycleScopeProvider.lifecycle(),
+            untilEvent
+        )
 
     fun <T> getScope(lifecycle: Observable<T>, untilEvent: T): Completable = lifecycle
         .filter { it == untilEvent }

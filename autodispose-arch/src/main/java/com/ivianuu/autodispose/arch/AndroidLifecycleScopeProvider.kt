@@ -24,7 +24,7 @@ import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.OnLifecycleEvent
 import com.ivianuu.autodispose.LifecycleEndedException
-import com.ivianuu.autodispose.lifecycle.LifecycleScopeProvider
+import com.ivianuu.autodispose.LifecycleScopeProvider
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
