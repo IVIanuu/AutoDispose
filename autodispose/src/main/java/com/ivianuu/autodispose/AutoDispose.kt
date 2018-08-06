@@ -16,7 +16,7 @@
 
 package com.ivianuu.autodispose
 
-import io.reactivex.Maybe
+import io.reactivex.Completable
 import io.reactivex.disposables.Disposable
 
 /**
@@ -24,7 +24,7 @@ import io.reactivex.disposables.Disposable
  */
 object AutoDispose {
 
-    fun autoDispose(disposable: Disposable, scope: Maybe<*>): Disposable =
+    fun autoDispose(disposable: Disposable, scope: Completable): Disposable =
         AutoDisposable(disposable, scope)
 
     fun autoDispose(disposable: Disposable, provider: ScopeProvider) =

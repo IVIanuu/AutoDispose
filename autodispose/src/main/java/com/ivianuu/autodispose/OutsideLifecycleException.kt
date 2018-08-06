@@ -20,14 +20,14 @@ package com.ivianuu.autodispose
  * This is an exception that can be thrown to indicate that the caller has attempted to bind to a lifecycle outside
  * of its allowable window.
  */
-open class OutsideLifecycleException(detailMessage: String? = null) : IllegalStateException(detailMessage) {
+open class OutsideLifecycleException(message: String = "Outside of the lifecycle") :
+    IllegalStateException(message) {
 
-    override fun fillInStackTrace(): Throwable {
-        return if (AutoDisposePlugins.fillInOutsideLifecycleExceptionStacktraces) {
+    override fun fillInStackTrace(): Throwable =
+        if (AutoDisposePlugins.fillInOutsideLifecycleExceptionStacktraces) {
             super.fillInStackTrace()
         } else {
             this
         }
-    }
 
 }

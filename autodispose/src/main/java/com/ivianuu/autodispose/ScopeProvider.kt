@@ -16,11 +16,11 @@
 
 package com.ivianuu.autodispose
 
-import io.reactivex.Maybe
+import io.reactivex.Completable
 
 /**
  * Provides the scope for auto disposal
  */
 interface ScopeProvider {
-    fun requestScope(): Maybe<*>
+    fun requestScope(): Completable
 }

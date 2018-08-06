@@ -19,14 +19,7 @@ package com.ivianuu.autodispose.android
 import android.os.Build
 import android.view.View
 
-/**
- * @author Manuel Wrage (IVIanuu)
- */
-internal object AutoDisposeAndroidUtil {
-
-    fun isAttached(view: View): Boolean {
-        return (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && view.isAttachedToWindow)
-                || view.windowToken != null
-    }
-
-}
+val View.isAttached
+    get() =
+        (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && isAttachedToWindow)
+                || windowToken != null

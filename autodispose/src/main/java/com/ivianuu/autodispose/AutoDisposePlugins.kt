@@ -24,22 +24,7 @@ import io.reactivex.functions.Consumer
 object AutoDisposePlugins {
 
     @Volatile var outsideLifecycleHandler: Consumer<in OutsideLifecycleException>? = null
-        set(handler) {
-            if (isLockdown) {
-                throw IllegalStateException("Plugins can't be changed anymore")
-            }
-            field = handler
-        }
-
     @Volatile var fillInOutsideLifecycleExceptionStacktraces = false
-        set(fillInStacktrace) {
-            if (isLockdown) {
-                throw IllegalStateException("Plugins can't be changed anymore")
-            }
-            field = fillInStacktrace
-        }
-
-    @Volatile var isLockdown = false
 
     fun reset() {
         outsideLifecycleHandler = null

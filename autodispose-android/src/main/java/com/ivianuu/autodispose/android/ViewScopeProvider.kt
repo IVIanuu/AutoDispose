@@ -19,28 +19,28 @@ package com.ivianuu.autodispose.android
 import android.view.View
 import com.ivianuu.autodispose.LifecycleNotStartedException
 import com.ivianuu.autodispose.ScopeProvider
-import io.reactivex.Maybe
+import io.reactivex.Completable
 
 /**
  * A [ScopeProvider] for [View]'s
  */
 class ViewScopeProvider private constructor(private val view: View) : ScopeProvider {
 
-    override fun requestScope(): Maybe<*> {
-        val isAttached = AutoDisposeAndroidUtil.isAttached(view)
+    override fun requestScope(): Completable {
+        val isAttached = view.isAttached
 
         if (!isAttached) {
             throw LifecycleNotStartedException()
         }
 
-        return Maybe.create<Unit> { e ->
+        return Completable.create { e ->
             val listener = object : View.OnAttachStateChangeListener {
-                override fun onViewAttachedToWindow(v: View?) {
+                override fun onViewAttachedToWindow(v: View) {
                 }
 
-                override fun onViewDetachedFromWindow(v: View?) {
+                override fun onViewDetachedFromWindow(v: View) {
                     if (!e.isDisposed) {
-                        e.onSuccess(Unit)
+                        e.onComplete()
                     }
                 }
             }
@@ -53,9 +53,7 @@ class ViewScopeProvider private constructor(private val view: View) : ScopeProvi
 
     companion object {
 
-        fun from(view: View): ScopeProvider {
-            return ViewScopeProvider(view)
-        }
+        fun from(view: View): ScopeProvider = ViewScopeProvider(view)
 
     }
 

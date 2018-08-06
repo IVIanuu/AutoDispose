@@ -12,10 +12,10 @@ object Versions {
     const val androidGradlePlugin = "3.1.3"
     const val archLifecycle = "1.1.1"
     const val conductor = "2.1.4"
-    const val kotlin = "1.2.41"
+    const val kotlin = "1.2.51"
     const val mavenGradle = "2.1"
     const val navi = "c521dab5e1"
-    const val rxJava = "2.1.14"
+    const val rxJava = "2.1.16"
     const val support = "28.0.0-alpha3"
 }
 

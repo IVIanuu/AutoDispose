@@ -19,4 +19,5 @@ package com.ivianuu.autodispose
 /**
  * Signifies an error occurred due to execution starting after the lifecycle has ended.
  */
-class LifecycleEndedException (s: String = "Lifecycle has ended!") : OutsideLifecycleException(s)
+class LifecycleEndedException(message: String = "Lifecycle has ended") :
+    OutsideLifecycleException(message)

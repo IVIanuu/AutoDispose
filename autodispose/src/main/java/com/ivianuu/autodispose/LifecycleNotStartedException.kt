@@ -19,4 +19,5 @@ package com.ivianuu.autodispose
 /**
  * Signifies an error occurred due to execution starting before the lifecycle has started.
  */
-class LifecycleNotStartedException(s: String = "Lifecycle hasn't started!") : OutsideLifecycleException(s)
+class LifecycleNotStartedException(message: String = "Lifecycle hasn't started") :
+    OutsideLifecycleException(message)

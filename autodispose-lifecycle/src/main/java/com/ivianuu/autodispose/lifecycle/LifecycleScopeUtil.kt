@@ -18,15 +18,12 @@ package com.ivianuu.autodispose.lifecycle
 
 import com.ivianuu.autodispose.AutoDisposePlugins
 import com.ivianuu.autodispose.LifecycleNotStartedException
-import io.reactivex.Maybe
+import io.reactivex.Completable
 import io.reactivex.Observable
 
-/**
- * @author Manuel Wrage (IVIanuu)
- */
 internal object LifecycleScopeUtil {
 
-    fun <T> getScope(lifecycleScopeProvider: LifecycleScopeProvider<T>): Maybe<*> {
+    fun <T> getScope(lifecycleScopeProvider: LifecycleScopeProvider<T>): Completable {
         val currentEvent = lifecycleScopeProvider.peekLifecycle()
 
         val exception = LifecycleNotStartedException()
@@ -35,26 +32,27 @@ internal object LifecycleScopeUtil {
             val handler = AutoDisposePlugins.outsideLifecycleHandler
             if (handler != null) {
                 handler.accept(exception)
-                return Maybe.just(Unit)
+                return Completable.complete()
             } else {
                 throw exception
             }
         }
 
-        val untilEvent = lifecycleScopeProvider.correspondingEvents().apply(currentEvent)
+        val untilEvent = lifecycleScopeProvider.correspondingEvents()
+            .apply(currentEvent)
 
         return getScope(lifecycleScopeProvider, untilEvent)
     }
 
-    fun <T> getScope(lifecycleScopeProvider: LifecycleScopeProvider<T>, untilEvent: T): Maybe<*> {
-        return getScope(lifecycleScopeProvider.lifecycle(), untilEvent)
-    }
+    fun <T> getScope(
+        lifecycleScopeProvider: LifecycleScopeProvider<T>,
+        untilEvent: T
+    ): Completable =
+        getScope(lifecycleScopeProvider.lifecycle(), untilEvent)
 
-    fun <T> getScope(lifecycle: Observable<T>, untilEvent: T): Maybe<*> {
-        return lifecycle
-            .filter { it == untilEvent }
-            .take(1)
-            .singleElement()
-    }
+    fun <T> getScope(lifecycle: Observable<T>, untilEvent: T): Completable = lifecycle
+        .filter { it == untilEvent }
+        .take(1)
+        .ignoreElements()
 
 }

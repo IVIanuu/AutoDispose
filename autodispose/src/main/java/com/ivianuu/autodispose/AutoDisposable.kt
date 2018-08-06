@@ -16,14 +16,14 @@
 
 package com.ivianuu.autodispose
 
-import io.reactivex.Maybe
+import io.reactivex.Completable
 import io.reactivex.disposables.Disposable
 import io.reactivex.internal.disposables.DisposableHelper
 import java.util.concurrent.atomic.AtomicReference
 
 internal class AutoDisposable(
     mainDisposable: Disposable,
-    scope: Maybe<*>
+    scope: Completable
 ) : Disposable {
 
     private val mainDisposable = AtomicReference<Disposable?>(mainDisposable)

@@ -20,28 +20,28 @@ import android.app.Dialog
 import android.view.View
 import com.ivianuu.autodispose.LifecycleNotStartedException
 import com.ivianuu.autodispose.ScopeProvider
-import io.reactivex.Maybe
+import io.reactivex.Completable
 
 /**
  * A [ScopeProvider] for [Dialog]'s
  */
 class DialogScopeProvider private constructor(private val dialog: Dialog) : ScopeProvider {
 
-    override fun requestScope(): Maybe<*> {
-        val isAttached = AutoDisposeAndroidUtil.isAttached(dialog.window.decorView)
+    override fun requestScope(): Completable {
+        val isAttached = dialog.window.decorView.isAttached
 
         if (!isAttached) {
             throw LifecycleNotStartedException()
         }
 
-        return Maybe.create<Unit> { e ->
+        return Completable.create { e ->
             val listener = object : View.OnAttachStateChangeListener {
-                override fun onViewAttachedToWindow(v: View?) {
+                override fun onViewAttachedToWindow(v: View) {
                 }
 
-                override fun onViewDetachedFromWindow(v: View?) {
+                override fun onViewDetachedFromWindow(v: View) {
                     if (!e.isDisposed) {
-                        e.onSuccess(Unit)
+                        e.onComplete()
                     }
                 }
             }
@@ -54,9 +54,7 @@ class DialogScopeProvider private constructor(private val dialog: Dialog) : Scop
 
     companion object {
 
-        fun from(dialog: Dialog): ScopeProvider {
-            return DialogScopeProvider(dialog)
-        }
+        fun from(dialog: Dialog): ScopeProvider = DialogScopeProvider(dialog)
 
     }
 

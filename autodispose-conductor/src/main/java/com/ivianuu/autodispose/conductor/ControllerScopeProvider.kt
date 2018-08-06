@@ -98,9 +98,7 @@ class ControllerScopeProvider private constructor(controller: Controller) :
     override fun correspondingEvents() =
         CORRESPONDING_EVENTS
 
-    override fun peekLifecycle(): ControllerEvent? {
-        return lifecycleSubject.value
-    }
+    override fun peekLifecycle() = lifecycleSubject.value
 
     companion object {
         private val CORRESPONDING_EVENTS =
@@ -115,8 +113,7 @@ class ControllerScopeProvider private constructor(controller: Controller) :
                 }
             }
 
-        fun from(controller: Controller): LifecycleScopeProvider<ControllerEvent> {
-            return ControllerScopeProvider(controller)
-        }
+        fun from(controller: Controller): LifecycleScopeProvider<ControllerEvent> =
+            ControllerScopeProvider(controller)
     }
 }

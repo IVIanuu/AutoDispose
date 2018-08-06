@@ -65,9 +65,8 @@ class AndroidLifecycleScopeProvider private constructor(
                 }
             }
 
-        fun from(owner: LifecycleOwner): LifecycleScopeProvider<Event> {
-            return AndroidLifecycleScopeProvider(owner)
-        }
+        fun from(owner: LifecycleOwner): LifecycleScopeProvider<Event> =
+            AndroidLifecycleScopeProvider(owner)
 
     }
 }

@@ -17,7 +17,6 @@
 package com.ivianuu.autodispose.lifecycle
 
 import com.ivianuu.autodispose.ScopeProvider
-import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.functions.Function
 
@@ -32,11 +31,9 @@ interface LifecycleScopeProvider<T> : ScopeProvider {
 
     fun peekLifecycle(): T?
 
-    override fun requestScope(): Maybe<*> {
-        return LifecycleScopeUtil.getScope(this)
-    }
+    override fun requestScope() =
+        LifecycleScopeUtil.getScope(this)
 
-    fun requestScope(untilEvent: T): Maybe<*> {
-        return LifecycleScopeUtil.getScope(lifecycle(), untilEvent)
-    }
+    fun requestScope(untilEvent: T) =
+        LifecycleScopeUtil.getScope(lifecycle(), untilEvent)
 }
