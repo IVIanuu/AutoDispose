@@ -17,10 +17,14 @@
 package com.ivianuu.autodispose
 
 import io.reactivex.Completable
+import io.reactivex.disposables.Disposable
 
 /**
  * Provides the scope for auto disposal
  */
 interface ScopeProvider {
     fun requestScope(): Completable
+
+    fun Disposable.autoDispose() = autoDispose(this@ScopeProvider)
+
 }

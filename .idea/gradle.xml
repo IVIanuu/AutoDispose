@@ -12,7 +12,6 @@
             <option value="$PROJECT_DIR$/autodispose-android" />
             <option value="$PROJECT_DIR$/autodispose-arch" />
             <option value="$PROJECT_DIR$/autodispose-conductor" />
-            <option value="$PROJECT_DIR$/autodispose-lifecycle" />
             <option value="$PROJECT_DIR$/autodispose-navi-android" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/sample" />

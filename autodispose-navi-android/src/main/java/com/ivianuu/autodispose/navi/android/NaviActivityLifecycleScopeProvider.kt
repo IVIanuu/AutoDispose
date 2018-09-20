@@ -70,7 +70,7 @@ class NaviActivityLifecycleScopeProvider private constructor(
 
     companion object {
 
-        private val CORRESPONDING_ACTIVITY_EVENTS = Function<ActivityEvent, ActivityEvent> {
+        private val CORRESPONDING_ACTIVITY_EVENTS: (ActivityEvent) -> ActivityEvent = {
             when (it) {
                 CREATE -> DESTROY
                 START -> STOP

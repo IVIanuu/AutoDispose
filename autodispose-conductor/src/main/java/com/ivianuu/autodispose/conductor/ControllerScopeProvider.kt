@@ -22,7 +22,6 @@ import com.bluelinelabs.conductor.Controller
 import com.ivianuu.autodispose.LifecycleScopeProvider
 import com.ivianuu.autodispose.OutsideLifecycleException
 import com.ivianuu.autodispose.conductor.ControllerEvent.*
-import io.reactivex.functions.Function
 import io.reactivex.subjects.BehaviorSubject
 
 /**
@@ -49,7 +48,7 @@ class ControllerScopeProvider private constructor(controller: Controller) :
 
     init {
         val initialState = if (controller.isBeingDestroyed || controller.isDestroyed) {
-            throw OutsideLifecycleException("Cannot bind to Controller lifecycle when outside of it.")
+            throw OutsideLifecycleException()
         } else if (controller.isAttached) {
             ATTACH
         } else if (controller.view != null) {
@@ -101,15 +100,14 @@ class ControllerScopeProvider private constructor(controller: Controller) :
     override fun peekLifecycle() = lifecycleSubject.value
 
     companion object {
-        private val CORRESPONDING_EVENTS =
-            Function<ControllerEvent, ControllerEvent> { lastEvent ->
+        private val CORRESPONDING_EVENTS: (ControllerEvent) -> ControllerEvent = { lastEvent ->
                 when (lastEvent) {
                     CREATE -> DESTROY
                     CONTEXT_AVAILABLE -> CONTEXT_UNAVAILABLE
                     CREATE_VIEW -> DESTROY_VIEW
                     ATTACH -> DETACH
                     DETACH -> DESTROY
-                    else -> throw OutsideLifecycleException("Cannot bind to Controller lifecycle when outside of it.")
+                    else -> throw OutsideLifecycleException()
                 }
             }
 

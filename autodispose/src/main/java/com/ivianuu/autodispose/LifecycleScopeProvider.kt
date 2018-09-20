@@ -17,6 +17,7 @@
 package com.ivianuu.autodispose
 
 import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Function
 
 /**
@@ -26,7 +27,7 @@ interface LifecycleScopeProvider<T> : ScopeProvider {
 
     fun lifecycle(): Observable<T>
 
-    fun correspondingEvents(): Function<T, T>
+    fun correspondingEvents(): (T) -> T
 
     fun peekLifecycle(): T?
 
@@ -35,4 +36,7 @@ interface LifecycleScopeProvider<T> : ScopeProvider {
 
     fun requestScope(untilEvent: T) =
         LifecycleScopeUtil.getScope(lifecycle(), untilEvent)
+
+    fun Disposable.autoDispose(untilEvent: T) =
+        autoDispose(this@LifecycleScopeProvider, untilEvent)
 }

@@ -23,10 +23,7 @@ import io.reactivex.functions.Consumer
  */
 object AutoDisposePlugins {
 
-    @Volatile var outsideLifecycleHandler: Consumer<in OutsideLifecycleException>? = null
-    @Volatile var fillInOutsideLifecycleExceptionStacktraces = false
+    var outsideLifecycleHandler: Consumer<in OutsideLifecycleException>? = null
+    var fillInOutsideLifecycleExceptionStacktraces = false
 
-    fun reset() {
-        outsideLifecycleHandler = null
-    }
 }

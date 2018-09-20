@@ -19,7 +19,7 @@ package com.ivianuu.autodispose.android
 import android.os.Build
 import android.view.View
 
-val View.isAttached
+internal val View.isAttached
     get() =
         (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && isAttachedToWindow)
                 || windowToken != null

@@ -16,6 +16,7 @@
 
 package com.ivianuu.autodispose.arch
 
+import android.arch.lifecycle.GenericLifecycleObserver
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.Lifecycle.Event
 import android.arch.lifecycle.Lifecycle.Event.*
@@ -51,8 +52,7 @@ class AndroidLifecycleScopeProvider private constructor(
     }
 
     companion object {
-        private val CORRESPONDING_EVENTS =
-            Function<Event, Event> { lastEvent ->
+        private val CORRESPONDING_EVENTS: (Event) -> Event = { lastEvent ->
                 when (lastEvent) {
                     ON_CREATE -> Event.ON_DESTROY
                     ON_START -> Event.ON_STOP
@@ -71,7 +71,7 @@ class AndroidLifecycleScopeProvider private constructor(
     }
 }
 
-internal class LifecycleObservable(private val lifecycle: Lifecycle) : Observable<Event>() {
+private class LifecycleObservable(private val lifecycle: Lifecycle) : Observable<Event>() {
     private val subject = BehaviorSubject.create<Event>()
 
     val value: Event?
@@ -98,9 +98,18 @@ internal class LifecycleObservable(private val lifecycle: Lifecycle) : Observabl
     class ArchLifecycleObserver(
         private val lifecycle: Lifecycle, private val observer: Observer<in Event>,
         private val subject: BehaviorSubject<Event>
-    ) : Disposable, LifecycleObserver {
+    ) : Disposable, GenericLifecycleObserver {
 
         private val disposed = AtomicBoolean(false)
+
+        override fun onStateChanged(source: LifecycleOwner, event: Event) {
+            if (!isDisposed) {
+                if (!(event == ON_CREATE && subject.value == event)) {
+                    subject.onNext(event)
+                }
+                observer.onNext(event)
+            }
+        }
 
         override fun isDisposed(): Boolean = disposed.get()
 
@@ -110,14 +119,5 @@ internal class LifecycleObservable(private val lifecycle: Lifecycle) : Observabl
             }
         }
 
-        @OnLifecycleEvent(Event.ON_ANY)
-        fun onStateChange(owner: LifecycleOwner, event: Event) {
-            if (!isDisposed) {
-                if (!(event == ON_CREATE && subject.value == event)) {
-                    subject.onNext(event)
-                }
-                observer.onNext(event)
-            }
-        }
     }
 }

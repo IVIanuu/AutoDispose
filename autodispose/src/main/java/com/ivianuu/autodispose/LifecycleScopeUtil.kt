@@ -36,8 +36,7 @@ internal object LifecycleScopeUtil {
             }
         }
 
-        val untilEvent = lifecycleScopeProvider.correspondingEvents()
-            .apply(currentEvent)
+        val untilEvent = lifecycleScopeProvider.correspondingEvents()(currentEvent)
 
         return getScope(
             lifecycleScopeProvider,

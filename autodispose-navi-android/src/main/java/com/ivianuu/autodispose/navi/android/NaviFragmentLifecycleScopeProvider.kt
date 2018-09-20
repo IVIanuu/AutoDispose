@@ -75,7 +75,7 @@ class NaviFragmentLifecycleScopeProvider private constructor(
 
     companion object {
 
-        private val CORRESPONDING_FRAGMENT_EVENTS = Function<FragmentEvent, FragmentEvent> {
+        private val CORRESPONDING_FRAGMENT_EVENTS: (FragmentEvent) -> FragmentEvent = {
             when (it) {
                 ATTACH -> DETACH
                 CREATE -> DESTROY
