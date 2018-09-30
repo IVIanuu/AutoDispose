@@ -21,7 +21,14 @@ import android.view.View
 import com.bluelinelabs.conductor.Controller
 import com.ivianuu.autodispose.LifecycleScopeProvider
 import com.ivianuu.autodispose.OutsideLifecycleException
-import com.ivianuu.autodispose.conductor.ControllerEvent.*
+import com.ivianuu.autodispose.conductor.ControllerEvent.ATTACH
+import com.ivianuu.autodispose.conductor.ControllerEvent.CONTEXT_AVAILABLE
+import com.ivianuu.autodispose.conductor.ControllerEvent.CONTEXT_UNAVAILABLE
+import com.ivianuu.autodispose.conductor.ControllerEvent.CREATE
+import com.ivianuu.autodispose.conductor.ControllerEvent.CREATE_VIEW
+import com.ivianuu.autodispose.conductor.ControllerEvent.DESTROY
+import com.ivianuu.autodispose.conductor.ControllerEvent.DESTROY_VIEW
+import com.ivianuu.autodispose.conductor.ControllerEvent.DETACH
 import io.reactivex.subjects.BehaviorSubject
 
 /**
@@ -41,7 +48,7 @@ enum class ControllerEvent {
 /**
  * Scope provider for controllers
  */
-class ControllerScopeProvider private constructor(controller: Controller) :
+class ControllerScopeProvider(controller: Controller) :
     LifecycleScopeProvider<ControllerEvent> {
 
     private val lifecycleSubject = BehaviorSubject.create<ControllerEvent>()
@@ -110,8 +117,7 @@ class ControllerScopeProvider private constructor(controller: Controller) :
                     else -> throw OutsideLifecycleException()
                 }
             }
-
-        fun from(controller: Controller): LifecycleScopeProvider<ControllerEvent> =
-            ControllerScopeProvider(controller)
     }
 }
+
+fun Controller.scope(): LifecycleScopeProvider<ControllerEvent> = ControllerScopeProvider(this)

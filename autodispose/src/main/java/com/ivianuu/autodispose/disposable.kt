@@ -16,7 +16,22 @@
 
 package com.ivianuu.autodispose
 
-/**
- * Factory for [ScopeProvider]'s
- */
-object ScopeProviders
+import io.reactivex.Completable
+import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
+
+fun Disposable.autoDispose(scope: Completable): Disposable =
+    AutoDisposable(this, scope)
+
+fun Disposable.autoDispose(provider: ScopeProvider) =
+    autoDispose(provider.requestScope())
+
+fun <T> Disposable.autoDispose(
+    provider: LifecycleScopeProvider<T>,
+    untilEvent: T
+) = autoDispose(provider.requestScope(untilEvent))
+
+fun <T> Disposable.autoDispose(
+    lifecycle: Observable<T>,
+    untilEvent: T
+) = autoDispose(LifecycleScopeUtil.getScope(lifecycle, untilEvent))

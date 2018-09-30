@@ -24,7 +24,7 @@ import io.reactivex.Completable
 /**
  * A [ScopeProvider] for [View]'s
  */
-class ViewScopeProvider private constructor(private val view: View) : ScopeProvider {
+class ViewScopeProvider(private val view: View) : ScopeProvider {
 
     override fun requestScope(): Completable {
         val isAttached = view.isAttached
@@ -50,11 +50,6 @@ class ViewScopeProvider private constructor(private val view: View) : ScopeProvi
             view.addOnAttachStateChangeListener(listener)
         }
     }
-
-    companion object {
-
-        fun from(view: View): ScopeProvider = ViewScopeProvider(view)
-
-    }
-
 }
+
+fun View.scope(): ScopeProvider = ViewScopeProvider(this)

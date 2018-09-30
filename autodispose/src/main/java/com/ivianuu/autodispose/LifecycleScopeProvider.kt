@@ -18,7 +18,6 @@ package com.ivianuu.autodispose
 
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Function
 
 /**
  * Lifecycle scope provider

@@ -16,29 +16,34 @@
 
 package com.ivianuu.autodispose.arch
 
-import android.arch.lifecycle.GenericLifecycleObserver
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.Lifecycle.Event
-import android.arch.lifecycle.Lifecycle.Event.*
-import android.arch.lifecycle.Lifecycle.State.*
-import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.OnLifecycleEvent
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.GenericLifecycleObserver
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Lifecycle.Event
+import androidx.lifecycle.Lifecycle.Event.ON_CREATE
+import androidx.lifecycle.Lifecycle.Event.ON_DESTROY
+import androidx.lifecycle.Lifecycle.Event.ON_PAUSE
+import androidx.lifecycle.Lifecycle.Event.ON_RESUME
+import androidx.lifecycle.Lifecycle.Event.ON_START
+import androidx.lifecycle.Lifecycle.Event.ON_STOP
+import androidx.lifecycle.Lifecycle.State.CREATED
+import androidx.lifecycle.Lifecycle.State.DESTROYED
+import androidx.lifecycle.Lifecycle.State.INITIALIZED
+import androidx.lifecycle.Lifecycle.State.RESUMED
+import androidx.lifecycle.Lifecycle.State.STARTED
+import androidx.lifecycle.LifecycleOwner
 import com.ivianuu.autodispose.LifecycleEndedException
 import com.ivianuu.autodispose.LifecycleScopeProvider
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Function
 import io.reactivex.subjects.BehaviorSubject
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * A [LifecycleScopeProvider] for [LifecycleOwner]'s
  */
-class AndroidLifecycleScopeProvider private constructor(
-    owner: LifecycleOwner
-) : LifecycleScopeProvider<Event> {
+class AndroidLifecycleScopeProvider(owner: LifecycleOwner) : LifecycleScopeProvider<Event> {
 
     private val lifecycleObservable = LifecycleObservable(owner.lifecycle)
 
@@ -64,10 +69,6 @@ class AndroidLifecycleScopeProvider private constructor(
                     )
                 }
             }
-
-        fun from(owner: LifecycleOwner): LifecycleScopeProvider<Event> =
-            AndroidLifecycleScopeProvider(owner)
-
     }
 }
 
@@ -80,7 +81,7 @@ private class LifecycleObservable(private val lifecycle: Lifecycle) : Observable
     fun backfillEvents() {
         val correspondingEvent = when (lifecycle.currentState) {
             INITIALIZED -> ON_CREATE
-            CREATED ->  ON_START
+            CREATED -> Event.ON_START
             STARTED, RESUMED -> ON_RESUME
             DESTROYED -> ON_DESTROY
             else ->  ON_DESTROY
@@ -96,7 +97,8 @@ private class LifecycleObservable(private val lifecycle: Lifecycle) : Observable
     }
 
     class ArchLifecycleObserver(
-        private val lifecycle: Lifecycle, private val observer: Observer<in Event>,
+        private val lifecycle: Lifecycle,
+        private val observer: Observer<in Event>,
         private val subject: BehaviorSubject<Event>
     ) : Disposable, GenericLifecycleObserver {
 
@@ -111,7 +113,7 @@ private class LifecycleObservable(private val lifecycle: Lifecycle) : Observable
             }
         }
 
-        override fun isDisposed(): Boolean = disposed.get()
+        override fun isDisposed() = disposed.get()
 
         override fun dispose() {
             if (!disposed.getAndSet(true)) {
@@ -121,3 +123,8 @@ private class LifecycleObservable(private val lifecycle: Lifecycle) : Observable
 
     }
 }
+
+fun LifecycleOwner.scope(): LifecycleScopeProvider<Event> = AndroidLifecycleScopeProvider(this)
+
+fun Fragment.viewScope(): LifecycleScopeProvider<Event> =
+    AndroidLifecycleScopeProvider(viewLifecycleOwner)

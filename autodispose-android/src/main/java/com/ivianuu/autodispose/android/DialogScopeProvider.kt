@@ -25,7 +25,7 @@ import io.reactivex.Completable
 /**
  * A [ScopeProvider] for [Dialog]'s
  */
-class DialogScopeProvider private constructor(private val dialog: Dialog) : ScopeProvider {
+class DialogScopeProvider(private val dialog: Dialog) : ScopeProvider {
 
     override fun requestScope(): Completable {
         val isAttached = dialog.window.decorView.isAttached
@@ -51,11 +51,6 @@ class DialogScopeProvider private constructor(private val dialog: Dialog) : Scop
             dialog.window.decorView.addOnAttachStateChangeListener(listener)
         }
     }
-
-    companion object {
-
-        fun from(dialog: Dialog): ScopeProvider = DialogScopeProvider(dialog)
-
-    }
-
 }
+
+fun Dialog.scope(): ScopeProvider = DialogScopeProvider(this)

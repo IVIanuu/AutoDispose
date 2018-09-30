@@ -16,14 +16,12 @@
 
 package com.ivianuu.autodispose
 
-import io.reactivex.functions.Consumer
-
 /**
  * Utility class to inject handlers to certain standard AutoDispose operations.
  */
 object AutoDisposePlugins {
 
-    var outsideLifecycleHandler: Consumer<in OutsideLifecycleException>? = null
+    var outsideLifecycleHandler: ((OutsideLifecycleException) -> Unit)? = null
     var fillInOutsideLifecycleExceptionStacktraces = false
 
 }

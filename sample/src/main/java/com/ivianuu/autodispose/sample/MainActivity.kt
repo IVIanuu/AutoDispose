@@ -17,11 +17,12 @@
 package com.ivianuu.autodispose.sample
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
-import com.ivianuu.autodispose.arch.autoDispose
+import com.ivianuu.autodispose.arch.scope
+import com.ivianuu.autodispose.autoDispose
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
         testObservable()
             .subscribe()
-            .autoDispose(this)
+            .autoDispose(scope())
     }
 
     override fun onBackPressed() {

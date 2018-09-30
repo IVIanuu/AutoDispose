@@ -24,7 +24,5 @@ import io.reactivex.disposables.Disposable
  */
 interface ScopeProvider {
     fun requestScope(): Completable
-
     fun Disposable.autoDispose() = autoDispose(this@ScopeProvider)
-
 }

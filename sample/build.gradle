@@ -29,13 +29,12 @@ android {
 }
 
 dependencies {
-    implementation Deps.supportAppCompat
+    implementation Deps.androidxAppCompat
 
     implementation project(':autodispose')
     implementation project(':autodispose-arch')
     implementation project(':autodispose-conductor')
     implementation project(':autodispose-android')
-    implementation project(':autodispose-navi-android')
 
     implementation Deps.kotlinStdLib
 }

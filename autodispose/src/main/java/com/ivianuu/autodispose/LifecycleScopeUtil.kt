@@ -29,7 +29,7 @@ internal object LifecycleScopeUtil {
         if (currentEvent == null) {
             val handler = AutoDisposePlugins.outsideLifecycleHandler
             if (handler != null) {
-                handler.accept(exception)
+                handler(exception)
                 return Completable.complete()
             } else {
                 throw exception

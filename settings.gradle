@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-include ':sample', ':autodispose', ':autodispose', ':autodispose-android', ':autodispose-arch', ':autodispose-conductor', ':autodispose-navi-android'
+include ':sample', ':autodispose', ':autodispose', ':autodispose-android', ':autodispose-arch', ':autodispose-conductor'
